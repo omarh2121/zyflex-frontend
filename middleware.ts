@@ -38,9 +38,18 @@ export function middleware(request: NextRequest) {
     }
   }
 
+  if (pathname === "/") {
+    if (isOwnerAuthed(request)) {
+      return NextResponse.redirect(new URL("/owner", request.url));
+    }
+    if (isDriverAuthed(request)) {
+      return NextResponse.redirect(new URL("/odense", request.url));
+    }
+  }
+
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/odense/:path*", "/owner/:path*", "/login"],
+  matcher: ["/", "/odense/:path*", "/owner/:path*", "/login"],
 };
