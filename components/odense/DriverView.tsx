@@ -18,7 +18,7 @@ import { getStoredCity, storeCity } from "@/lib/cities/storage";
 import { getStoredZone, storeZone } from "@/lib/cities/zone-storage";
 import { findNearestZone, formatDistanceKm } from "@/lib/cities/zone-utils";
 import { clearAuthSession, getDriverName } from "@/lib/odense/auth";
-import { useDriverLocation } from "@/lib/location/use-driver-location";
+import { useLocation } from "@/lib/location/location-context";
 import HotZoneList from "@/components/odense/HotZoneList";
 import UpcomingEvents from "@/components/odense/UpcomingEvents";
 import ZoneMap from "@/components/odense/ZoneMap";
@@ -81,12 +81,9 @@ export default function DriverView({ initialNowIso }: DriverViewProps) {
   const [driverName, setDriverName] = useState("");
 
   const {
-    status: locationStatus,
     location: userLocation,
-    error: locationError,
-    requestPermission,
     isActive: gpsActive,
-  } = useDriverLocation();
+  } = useLocation();
 
   const zones = useMemo(() => getZones(cityId), [cityId]);
   const events = useMemo(() => getVisibleEvents(cityId, now), [cityId, now]);
@@ -219,21 +216,7 @@ export default function DriverView({ initialNowIso }: DriverViewProps) {
           focusUserLocation={focusUserLocation}
         />
 
-        <div className="absolute left-3 top-3 z-[500] flex flex-col gap-2">
-          {!gpsActive && locationStatus !== "requesting" && (
-            <button
-              type="button"
-              onClick={requestPermission}
-              className="rounded-lg bg-blue-600 px-3 py-2 text-xs font-bold text-white shadow-lg transition hover:bg-blue-500"
-            >
-              📍 Tillad min placering
-            </button>
-          )}
-          {locationStatus === "requesting" && (
-            <span className="rounded-lg border border-[#1e2d45] bg-[#080c14]/95 px-3 py-2 text-xs text-slate-400">
-              Henter GPS…
-            </span>
-          )}
+        <div className="absolute left-3 top-3 z-[500]">
           {gpsActive && (
             <button
               type="button"
@@ -244,12 +227,6 @@ export default function DriverView({ initialNowIso }: DriverViewProps) {
             </button>
           )}
         </div>
-
-        {(locationError || locationStatus === "unsupported") && (
-          <div className="absolute bottom-12 left-3 right-3 z-[500] rounded-lg border border-red-900/60 bg-red-950/80 px-3 py-2 text-xs text-red-300">
-            {locationError ?? "GPS ikke tilgængelig"}
-          </div>
-        )}
 
         <div className="pointer-events-none absolute bottom-3 left-3 rounded-lg border border-[#1e2d45] bg-[#080c14]/90 px-2 py-1 text-[10px] text-slate-500">
           Opdateres hvert minut · {formatTimeDa(now)}
