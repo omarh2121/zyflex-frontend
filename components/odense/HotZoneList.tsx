@@ -2,33 +2,58 @@ import type { ScoredZone } from "@/lib/odense/types";
 import { scoreColor } from "@/lib/odense/zone-logic";
 import { NavigateSection } from "@/components/odense/NavigateButton";
 
-export default function HotZoneList({ zones }: { zones: ScoredZone[] }) {
+export default function HotZoneList({
+  zones,
+  selectedZoneId,
+  onSelectZone,
+}: {
+  zones: ScoredZone[];
+  selectedZoneId?: string | null;
+  onSelectZone?: (zoneId: string) => void;
+}) {
   const hotCount = zones.filter((z) => z.isHot).length;
+  const displayZones = selectedZoneId
+    ? zones.filter((z) => z.id === selectedZoneId)
+    : zones;
 
   return (
     <section className="px-4 pb-4">
       <div className="mb-3 flex items-end justify-between">
         <div>
-          <h2 className="text-base font-bold text-white">Hvor er der gang i den nu</h2>
+          <h2 className="text-base font-bold text-white">
+            {selectedZoneId ? "Din valgte zone" : "Hvor er der gang i den nu"}
+          </h2>
           <p className="text-xs text-slate-500">
-            {hotCount > 0
-              ? `${hotCount} zone${hotCount === 1 ? "" : "r"} er hotte lige nu`
-              : "Ingen zoner i peak — se listen for næste bedste mulighed"}
+            {selectedZoneId
+              ? "Tryk på en zone på kortet eller listen for at skifte"
+              : hotCount > 0
+                ? `${hotCount} zone${hotCount === 1 ? "" : "r"} er hotte lige nu · tryk for at vælge`
+                : "Ingen zoner i peak — tryk for at vælge din zone"}
           </p>
         </div>
       </div>
 
       <ol className="space-y-2">
-        {zones.map((zone, index) => {
+        {displayZones.map((zone) => {
           const color = scoreColor(zone.score);
+          const selected = zone.id === selectedZoneId;
+          const rankIndex = zones.findIndex((z) => z.id === zone.id);
 
           return (
             <li
               key={zone.id}
-              className={`rounded-2xl border p-4 transition ${
-                zone.isHot
-                  ? "border-amber-500/40 bg-amber-950/20"
-                  : "border-[#1e2d45] bg-[#0f1520]"
+              role="button"
+              tabIndex={0}
+              onClick={() => onSelectZone?.(zone.id)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") onSelectZone?.(zone.id);
+              }}
+              className={`cursor-pointer rounded-2xl border p-4 transition ${
+                selected
+                  ? "border-blue-500/50 bg-blue-950/25 ring-1 ring-blue-500/30"
+                  : zone.isHot
+                    ? "border-amber-500/40 bg-amber-950/20 hover:border-amber-400/60"
+                    : "border-[#1e2d45] bg-[#0f1520] hover:border-[#2a3f5f]"
               }`}
             >
               <div className="flex items-start gap-3">
@@ -40,7 +65,7 @@ export default function HotZoneList({ zones }: { zones: ScoredZone[] }) {
                     border: `1px solid ${color}44`,
                   }}
                 >
-                  {index + 1}
+                  {rankIndex + 1}
                 </div>
 
                 <div className="min-w-0 flex-1">
@@ -49,6 +74,11 @@ export default function HotZoneList({ zones }: { zones: ScoredZone[] }) {
                     {zone.isHot && (
                       <span className="shrink-0 rounded-full bg-amber-500/20 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-amber-300">
                         Hot
+                      </span>
+                    )}
+                    {selected && (
+                      <span className="shrink-0 rounded-full bg-blue-500/20 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-blue-300">
+                        Valgt
                       </span>
                     )}
                   </div>
