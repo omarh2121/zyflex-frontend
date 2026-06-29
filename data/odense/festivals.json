@@ -1,66 +1,6 @@
 {
-  "source": "Kurateret lokal liste — kun festivaler tæt på Odense. Fuld DK-liste gemmes ikke i appen.",
+  "source": "Tilføj festivaler manuelt i events.json eller her.",
   "maxDistanceKm": 50,
   "upcomingWithinDays": 90,
-  "festivals": [
-    {
-      "id": "rock-under-broen-2026",
-      "name": "Rock under broen",
-      "city": "Middelfart",
-      "lat": 55.502,
-      "lng": 9.7305,
-      "address": "Havnegade, 5500 Middelfart",
-      "startDate": "2026-06-06",
-      "endDate": "2026-06-07",
-      "visitors": 20000
-    },
-    {
-      "id": "heartland-2026",
-      "name": "Heartland Festival",
-      "city": "Kværndrup",
-      "lat": 55.1795,
-      "lng": 10.4912,
-      "address": "Egeskov Gade 18, 5772 Kværndrup",
-      "startDate": "2026-06-18",
-      "endDate": "2026-06-20",
-      "visitors": 20000,
-      "major": true
-    },
-    {
-      "id": "tinderbox-2026",
-      "name": "Tinderbox",
-      "city": "Odense",
-      "lat": 55.4039,
-      "lng": 10.4234,
-      "address": "Tusindårsskoven, 5000 Odense",
-      "startDate": "2026-06-25",
-      "endDate": "2026-06-27",
-      "visitors": 45000,
-      "major": true,
-      "zoneId": "centrum-natteliv"
-    },
-    {
-      "id": "generator-2026",
-      "name": "Generator Festival",
-      "city": "Odense",
-      "lat": 55.3951,
-      "lng": 10.3883,
-      "address": "Odense Centrum, 5000 Odense",
-      "startDate": "2026-09-07",
-      "endDate": "2026-09-08",
-      "visitors": 19000,
-      "zoneId": "centrum-natteliv"
-    },
-    {
-      "id": "kloften-2026",
-      "name": "Kløften Festival",
-      "city": "Haderslev",
-      "lat": 55.249,
-      "lng": 9.489,
-      "address": "Kløften, 6100 Haderslev",
-      "startDate": "2026-06-26",
-      "endDate": "2026-06-28",
-      "visitors": 8000
-    }
-  ]
+  "festivals": []
 }

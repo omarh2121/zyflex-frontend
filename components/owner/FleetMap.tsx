@@ -3,9 +3,14 @@
 import type { MutableRefObject } from "react";
 import { useEffect, useRef } from "react";
 import type { CircleMarker as LeafletCircleMarker, Map as LeafletMap } from "leaflet";
-import { HORSENS_CENTER } from "@/lib/owner/fleet-demo";
+import { CITY_BY_ID } from "@/lib/cities/config";
 import { FLEET_STATUS } from "@/lib/owner/fleet";
 import type { FleetVehicle } from "@/lib/owner/types";
+
+const MAP_CENTER: [number, number] = [
+  CITY_BY_ID.horsens.center.lat,
+  CITY_BY_ID.horsens.center.lng,
+];
 
 type LeafletApi = typeof import("leaflet");
 
@@ -44,7 +49,7 @@ export default function FleetMap({ vehicles }: { vehicles: FleetVehicle[] }) {
 
       leafletRef.current = L;
       const map = L.map(containerRef.current, {
-        center: HORSENS_CENTER,
+        center: MAP_CENTER,
         zoom: 14,
         zoomControl: true,
       });

@@ -29,7 +29,7 @@ export interface RepeatAddress {
 }
 
 export interface TaxameterAnalysis {
-  source: "upload" | "demo";
+  source: "upload";
   fileName?: string;
   companyName: string;
   totalRevenue: number;

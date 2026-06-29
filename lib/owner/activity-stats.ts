@@ -1,33 +1,6 @@
 import type { DriverOpenLog } from "@/lib/odense/types";
 import type { DriverSummary, OwnerActivitySnapshot } from "./types";
 
-const DEMO_DRIVERS: DriverSummary[] = [
-  {
-    driverId: "demo-ahmed",
-    driverName: "Ahmed",
-    lastLogin: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
-    city: "Odense",
-    zone: "Banegården",
-    openedToday: true,
-  },
-  {
-    driverId: "demo-peter",
-    driverName: "Peter",
-    lastLogin: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
-    city: "Odense",
-    zone: "Centrum / Natteliv",
-    openedToday: true,
-  },
-  {
-    driverId: "demo-maria",
-    driverName: "Maria",
-    lastLogin: new Date(Date.now() - 26 * 60 * 60 * 1000).toISOString(),
-    city: "Horsens",
-    zone: "Sygehus",
-    openedToday: false,
-  },
-];
-
 function isToday(iso: string): boolean {
   const d = new Date(iso);
   const now = new Date();
@@ -46,6 +19,15 @@ function formatLoginDa(iso: string): string {
     hour: "2-digit",
     minute: "2-digit",
   });
+}
+
+export function emptyActivity(): OwnerActivitySnapshot {
+  return {
+    totalDrivers: 0,
+    drivers: [],
+    openedTodayCount: 0,
+    openedTodayNames: [],
+  };
 }
 
 export function aggregateDriverActivity(opens: DriverOpenLog[]): OwnerActivitySnapshot {
@@ -68,7 +50,7 @@ export function aggregateDriverActivity(opens: DriverOpenLog[]): OwnerActivitySn
       driverId,
       driverName: latest.driverName,
       lastLogin: latest.openedAt,
-      city: latest.city || "Odense",
+      city: latest.city || "—",
       zone: latest.zone || "—",
       openedToday,
     };
@@ -83,15 +65,6 @@ export function aggregateDriverActivity(opens: DriverOpenLog[]): OwnerActivitySn
     drivers,
     openedTodayCount: openedTodayNames.length,
     openedTodayNames,
-  };
-}
-
-export function getDemoActivity(): OwnerActivitySnapshot {
-  return {
-    totalDrivers: DEMO_DRIVERS.length,
-    drivers: DEMO_DRIVERS,
-    openedTodayCount: DEMO_DRIVERS.filter((d) => d.openedToday).length,
-    openedTodayNames: DEMO_DRIVERS.filter((d) => d.openedToday).map((d) => d.driverName),
   };
 }
 

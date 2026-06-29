@@ -1,4 +1,3 @@
-import { DEMO_COMPANY_NAME, getDemoTrips } from "./demo-data";
 import type {
   DriverPerformance,
   RankedMetric,
@@ -46,7 +45,7 @@ function buildEarningsTips(analysis: Omit<TaxameterAnalysis, "earningsTips">): s
 
 export function analyzeTrips(
   trips: TaxameterTrip[],
-  options: { source: "upload" | "demo"; fileName?: string; companyName?: string },
+  options: { source: "upload"; fileName?: string; companyName?: string },
 ): TaxameterAnalysis {
   const totalRevenue = trips.reduce((s, t) => s + t.amount, 0);
   const tripCount = trips.length;
@@ -116,7 +115,7 @@ export function analyzeTrips(
   const base: Omit<TaxameterAnalysis, "earningsTips"> = {
     source: options.source,
     fileName: options.fileName,
-    companyName: options.companyName || DEMO_COMPANY_NAME,
+    companyName: options.companyName || "Din vognmandsforretning",
     totalRevenue,
     tripCount,
     avgTripPrice,
@@ -130,10 +129,6 @@ export function analyzeTrips(
   };
 
   return { ...base, earningsTips: buildEarningsTips(base) };
-}
-
-export function getDemoAnalysis(companyName?: string): TaxameterAnalysis {
-  return analyzeTrips(getDemoTrips(), { source: "demo", companyName: companyName || DEMO_COMPANY_NAME });
 }
 
 export function formatKr(amount: number): string {

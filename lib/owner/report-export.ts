@@ -12,7 +12,7 @@ export function downloadReportExcel(analysis: TaxameterAnalysis, aiReport?: stri
     ["Samlet omsætning", analysis.totalRevenue],
     ["Antal ture", analysis.tripCount],
     ["Gns. pris pr. tur", analysis.avgTripPrice],
-    ["Kilde", analysis.source === "demo" ? "Demo-data" : analysis.fileName || "Upload"],
+    ["Kilde", analysis.fileName || "Upload"],
     ["Analyseret", new Date(analysis.parsedAt).toLocaleString("da-DK")],
   ];
   XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(summary), "Nøgletal");
