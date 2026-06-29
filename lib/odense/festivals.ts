@@ -1,11 +1,13 @@
 import odenseFestivals from "@/data/odense/festivals.json";
 import koldingFestivals from "@/data/kolding/festivals.json";
+import horsensFestivals from "@/data/horsens/festivals.json";
 import type { CityId } from "@/lib/cities/config";
 import type { FestivalRecord, SpecialEvent, Zone } from "./types";
 
 const FESTIVALS_BY_CITY: Record<CityId, typeof odenseFestivals> = {
   odense: odenseFestivals,
   kolding: koldingFestivals,
+  horsens: horsensFestivals,
 };
 
 function toDateKey(date: Date): string {

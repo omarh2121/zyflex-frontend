@@ -73,9 +73,48 @@ function buildActiveReason(zone: Zone, day: DayOfWeek, hour: number, score: numb
   return zone.reason;
 }
 
-export function scoreZone(zone: Zone, now: Date = new Date()): ScoredZone {
+export function scoreZone(
+  zone: Zone,
+  now: Date = new Date(),
+  todayEvents: SpecialEvent[] = [],
+): ScoredZone {
   const day = getDayOfWeek(now);
   const hour = now.getHours();
+  const zoneEventsToday = todayEvents.filter((e) => e.zoneId === zone.id);
+
+  if (zone.eventDriven) {
+    if (zoneEventsToday.length === 0) {
+      return {
+        ...zone,
+        score: 0,
+        isHot: false,
+        activeReason: `Ingen event i dag — ${zone.reason}`,
+      };
+    }
+
+    let score = 0;
+    for (const range of zone.busyHours) {
+      if (isHourInRange(hour, range)) {
+        score = Math.max(score, peakScoreForRange(range));
+      }
+    }
+
+    if (score === 0) {
+      score = 45;
+    }
+
+    if (zoneEventsToday.some((e) => e.major)) {
+      score = Math.min(100, score + 12);
+    }
+
+    const eventTitles = zoneEventsToday.map((e) => e.title).join(", ");
+    return {
+      ...zone,
+      score,
+      isHot: score >= HOT_THRESHOLD,
+      activeReason: `${zone.reason} · Event i dag: ${eventTitles}`,
+    };
+  }
 
   if (!isDayActive(zone, day)) {
     return {
@@ -109,9 +148,15 @@ export function scoreZone(zone: Zone, now: Date = new Date()): ScoredZone {
   };
 }
 
-export function rankZones(zones: Zone[], now: Date = new Date()): ScoredZone[] {
+export function rankZones(
+  zones: Zone[],
+  now: Date = new Date(),
+  events: SpecialEvent[] = [],
+): ScoredZone[] {
+  const todayEvents = events.filter((e) => isEventToday(e, now));
+
   return zones
-    .map((z) => scoreZone(z, now))
+    .map((z) => scoreZone(z, now, todayEvents))
     .sort((a, b) => {
       if (b.score !== a.score) return b.score - a.score;
       return b.priority - a.priority;

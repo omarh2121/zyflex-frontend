@@ -2,6 +2,8 @@ import odenseZones from "@/data/odense/zones.json";
 import odenseEvents from "@/data/odense/events.json";
 import koldingZones from "@/data/kolding/zones.json";
 import koldingEvents from "@/data/kolding/events.json";
+import horsensZones from "@/data/horsens/zones.json";
+import horsensEvents from "@/data/horsens/events.json";
 import { CITY_BY_ID, type CityId } from "./config";
 import { getNearbyFestivalEvents } from "@/lib/odense/festivals";
 import type { SpecialEvent, Zone } from "@/lib/odense/types";
@@ -9,11 +11,13 @@ import type { SpecialEvent, Zone } from "@/lib/odense/types";
 const ZONES: Record<CityId, Zone[]> = {
   odense: odenseZones.zones as Zone[],
   kolding: koldingZones.zones as Zone[],
+  horsens: horsensZones.zones as Zone[],
 };
 
 const EVENTS: Record<CityId, SpecialEvent[]> = {
   odense: odenseEvents.events as SpecialEvent[],
   kolding: koldingEvents.events as SpecialEvent[],
+  horsens: horsensEvents.events as SpecialEvent[],
 };
 
 export function getZones(cityId: CityId): Zone[] {

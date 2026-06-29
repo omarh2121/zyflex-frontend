@@ -1,0 +1,87 @@
+{
+  "zones": [
+    {
+      "id": "centrum-natteliv",
+      "name": "Horsens Centrum / Natteliv",
+      "lat": 55.8614,
+      "lng": 9.8503,
+      "address": "Torvet, 8700 Horsens",
+      "demandType": "natteliv",
+      "busyDays": ["friday", "saturday"],
+      "busyHours": [{ "start": 22, "end": 3, "peakScore": 95 }],
+      "reason": "Barer og klubber lukker — mange skal hjem samtidig",
+      "priority": 5
+    },
+    {
+      "id": "banegaard",
+      "name": "Horsens Banegård",
+      "lat": 55.8607,
+      "lng": 9.8498,
+      "address": "Rejseplanen, 8700 Horsens",
+      "demandType": "station",
+      "busyDays": "daily",
+      "busyHours": [
+        { "start": 7, "end": 9, "peakScore": 88 },
+        { "start": 15, "end": 18, "peakScore": 90 }
+      ],
+      "baselineScore": 28,
+      "reason": "Rejsende ankommer og afgår — særligt morgen og sen eftermiddag",
+      "priority": 4
+    },
+    {
+      "id": "hybel-arena",
+      "name": "Hybel Arena (tidl. CASA Arena)",
+      "lat": 55.8558,
+      "lng": 9.8354,
+      "address": "Nordre Kaj 19, 8700 Horsens",
+      "demandType": "arena",
+      "busyDays": "daily",
+      "busyHours": [{ "start": 18, "end": 24, "peakScore": 92 }],
+      "eventDriven": true,
+      "reason": "Stadionkoncerter og AC Horsens-kampe — stor spike ved events",
+      "priority": 6
+    },
+    {
+      "id": "faengslet",
+      "name": "FÆNGSLET",
+      "lat": 55.8631,
+      "lng": 9.8422,
+      "address": "Gefionsvej 82, 8700 Horsens",
+      "demandType": "koncert",
+      "busyDays": "daily",
+      "busyHours": [{ "start": 18, "end": 24, "peakScore": 90 }],
+      "eventDriven": true,
+      "reason": "Store koncerter og Middelalderfestival — event-drevet efterspørgsel",
+      "priority": 6
+    },
+    {
+      "id": "regionshospitalet",
+      "name": "Regionshospitalet Horsens",
+      "lat": 55.8703,
+      "lng": 9.8278,
+      "address": "Sygehusvej 1, 8700 Horsens",
+      "demandType": "sygehus",
+      "busyDays": "daily",
+      "busyHours": [
+        { "start": 6, "end": 9, "peakScore": 82 },
+        { "start": 16, "end": 20, "peakScore": 85 }
+      ],
+      "baselineScore": 35,
+      "reason": "Patient- og besøgskørsel — morgen og aften",
+      "priority": 3
+    },
+    {
+      "id": "bilka-storcenter",
+      "name": "Bilka / storcenter-området",
+      "lat": 55.843,
+      "lng": 9.819,
+      "address": "Høegh Guldbergs Gade 10, 8700 Horsens",
+      "demandType": "shopping",
+      "busyDays": ["friday", "saturday", "sunday"],
+      "busyHours": [{ "start": 15, "end": 21, "peakScore": 72 }],
+      "weekendBoost": 18,
+      "reason": "Shopping-toppe — sen eftermiddag og aften, især i weekenden",
+      "priority": 2
+    }
+  ]
+}

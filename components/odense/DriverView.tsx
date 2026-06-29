@@ -93,7 +93,7 @@ export default function DriverView({ initialNowIso }: DriverViewProps) {
   const mapCenter = useMemo(() => getCityCenter(cityId), [cityId]);
   const cityName = getCityName(cityId);
 
-  const ranked = useMemo(() => rankZones(zones, now), [zones, now]);
+  const ranked = useMemo(() => rankZones(zones, now, events), [zones, now, events]);
   const upcomingEvents = useMemo(() => getUpcomingWithinDays(events, now, 90), [events, now]);
   const hotCount = ranked.filter((z) => z.isHot).length;
 
@@ -133,7 +133,7 @@ export default function DriverView({ initialNowIso }: DriverViewProps) {
     const zoneLabel =
       selectedZone?.name ||
       nearestZone?.zone.name ||
-      rankZones(getZones(cityId), new Date())[0]?.name ||
+      rankZones(getZones(cityId), new Date(), getVisibleEvents(cityId))[0]?.name ||
       cityName;
     void logAppOpen(driverId, name, cityName, zoneLabel);
   }, [cityId, cityName, selectedZone, nearestZone]);

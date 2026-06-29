@@ -27,6 +27,8 @@ export interface Zone {
   priority: number;
   baselineScore?: number;
   weekendBoost?: number;
+  /** Kun høj score når der er et event i zonen samme dag */
+  eventDriven?: boolean;
 }
 
 export interface ScoredZone extends Zone {
