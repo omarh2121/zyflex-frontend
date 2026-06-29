@@ -1,14 +1,19 @@
-import type { SpecialEvent } from "@/lib/odense/types";
+import type { SpecialEvent, Zone } from "@/lib/odense/types";
 import { formatEventDateDa } from "@/lib/odense/zone-logic";
 import { buildEventRecommendation, formatVisitors } from "@/lib/odense/event-recommendations";
-import { getOdenseZones } from "@/lib/odense/data";
 import { NavigateSection } from "@/components/odense/NavigateButton";
 
-function zoneName(zoneId: string): string {
-  return getOdenseZones().find((z) => z.id === zoneId)?.name ?? zoneId;
+function zoneName(zones: Zone[], zoneId: string): string {
+  return zones.find((z) => z.id === zoneId)?.name ?? zoneId;
 }
 
-export default function UpcomingEvents({ events }: { events: SpecialEvent[] }) {
+export default function UpcomingEvents({
+  events,
+  zones,
+}: {
+  events: SpecialEvent[];
+  zones: Zone[];
+}) {
   return (
     <section className="border-t border-[#1e2d45] px-4 pb-10 pt-6">
       <div className="mb-4">
@@ -23,7 +28,7 @@ export default function UpcomingEvents({ events }: { events: SpecialEvent[] }) {
       ) : (
         <ul className="space-y-3">
           {events.map((event) => (
-            <EventCard key={event.id} event={event} />
+            <EventCard key={event.id} event={event} zones={zones} />
           ))}
         </ul>
       )}
@@ -31,8 +36,8 @@ export default function UpcomingEvents({ events }: { events: SpecialEvent[] }) {
   );
 }
 
-function EventCard({ event }: { event: SpecialEvent }) {
-  const nearestZone = zoneName(event.zoneId);
+function EventCard({ event, zones }: { event: SpecialEvent; zones: Zone[] }) {
+  const nearestZone = zoneName(zones, event.zoneId);
   const rec = buildEventRecommendation(event, nearestZone);
   const guests = formatVisitors(event.visitors);
 

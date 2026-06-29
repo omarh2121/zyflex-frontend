@@ -1,0 +1,73 @@
+{
+  "zones": [
+    {
+      "id": "centrum-natteliv",
+      "name": "Kolding Centrum / Natteliv",
+      "lat": 55.4901,
+      "lng": 9.472,
+      "address": "Jernbanegade, 6000 Kolding",
+      "demandType": "natteliv",
+      "busyDays": ["friday", "saturday"],
+      "busyHours": [{ "start": 22, "end": 3, "peakScore": 95 }],
+      "reason": "Barer og klubber lukker — mange skal hjem samtidig",
+      "priority": 5
+    },
+    {
+      "id": "banegaard",
+      "name": "Kolding Banegård",
+      "lat": 55.4908,
+      "lng": 9.4796,
+      "address": "Rejseplanen, 6000 Kolding",
+      "demandType": "station",
+      "busyDays": "daily",
+      "busyHours": [
+        { "start": 7, "end": 9, "peakScore": 88 },
+        { "start": 15, "end": 18, "peakScore": 90 }
+      ],
+      "baselineScore": 28,
+      "reason": "Rejsende ankommer og afgår — særligt morgen og sen eftermiddag",
+      "priority": 4
+    },
+    {
+      "id": "sygehus-lillebaelt",
+      "name": "Sygehus Lillebælt, Kolding",
+      "lat": 55.4891,
+      "lng": 9.4947,
+      "address": "Sygehusvej 1, 6000 Kolding",
+      "demandType": "sygehus",
+      "busyDays": "daily",
+      "busyHours": [
+        { "start": 6, "end": 9, "peakScore": 82 },
+        { "start": 16, "end": 20, "peakScore": 85 }
+      ],
+      "baselineScore": 35,
+      "reason": "Patient- og besøgskørsel — morgen og aften",
+      "priority": 3
+    },
+    {
+      "id": "storcenter",
+      "name": "Kolding Storcenter",
+      "lat": 55.4867,
+      "lng": 9.4693,
+      "address": "Skovvangen 2, 6000 Kolding",
+      "demandType": "shopping",
+      "busyDays": ["friday", "saturday", "sunday"],
+      "busyHours": [{ "start": 15, "end": 21, "peakScore": 72 }],
+      "weekendBoost": 18,
+      "reason": "Shopping-toppe — sen eftermiddag og aften, især i weekenden",
+      "priority": 2
+    },
+    {
+      "id": "godset",
+      "name": "Godset (spillested)",
+      "lat": 55.4898,
+      "lng": 9.4735,
+      "address": "Jernbanegade 4, 6000 Kolding",
+      "demandType": "koncert",
+      "busyDays": ["thursday", "friday", "saturday"],
+      "busyHours": [{ "start": 19, "end": 24, "peakScore": 88 }],
+      "reason": "Koncerter trækker folk til og fra — særligt om aftenen",
+      "priority": 4
+    }
+  ]
+}

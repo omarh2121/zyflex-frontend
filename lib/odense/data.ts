@@ -1,27 +1,21 @@
-import zonesData from "@/data/odense/zones.json";
-import eventsData from "@/data/odense/events.json";
-import { getNearbyFestivalEvents } from "./festivals";
-import type { SpecialEvent, Zone } from "./types";
+import type { CityId } from "@/lib/cities/config";
+import {
+  getCityCenter,
+  getCityEvents,
+  getCityName,
+  getVisibleEvents,
+  getZones,
+} from "@/lib/cities/data";
 
-export function getOdenseZones(): Zone[] {
-  return zonesData.zones as Zone[];
+/** @deprecated Brug getZones("odense") fra lib/cities/data */
+export function getOdenseZones() {
+  return getZones("odense");
 }
 
-export function getOdenseEvents(): SpecialEvent[] {
-  return eventsData.events as SpecialEvent[];
+/** @deprecated Brug getCityEvents("odense") fra lib/cities/data */
+export function getOdenseEvents() {
+  return getCityEvents("odense");
 }
 
-export function getVisibleEvents(now: Date = new Date()): SpecialEvent[] {
-  const zones = getOdenseZones();
-  const manual = getOdenseEvents().map((event) => ({
-    ...event,
-    source: event.source ?? ("manual" as const),
-    zoneDistanceKm: event.zoneDistanceKm ?? 0,
-  }));
-  const festivals = getNearbyFestivalEvents(zones, now);
-
-  return [...manual, ...festivals].sort((a, b) => {
-    if (a.date !== b.date) return a.date.localeCompare(b.date);
-    return (a.distanceKm ?? 999) - (b.distanceKm ?? 999);
-  });
-}
+export { getVisibleEvents, getZones, getCityEvents, getCityCenter, getCityName };
+export type { CityId };

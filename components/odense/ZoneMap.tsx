@@ -6,8 +6,6 @@ import type { CircleMarker as LeafletCircleMarker, Map as LeafletMap } from "lea
 import type { ScoredZone } from "@/lib/odense/types";
 import { scoreColor } from "@/lib/odense/zone-logic";
 
-const ODENSE_CENTER: [number, number] = [55.3955, 10.3885];
-
 type LeafletApi = typeof import("leaflet");
 
 async function loadLeaflet(): Promise<LeafletApi> {
@@ -31,7 +29,13 @@ function tooltipHtml(zone: ScoredZone, color: string): string {
   `;
 }
 
-export default function ZoneMap({ zones }: { zones: ScoredZone[] }) {
+export default function ZoneMap({
+  zones,
+  center,
+}: {
+  zones: ScoredZone[];
+  center: [number, number];
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<LeafletMap | null>(null);
   const leafletRef = useRef<LeafletApi | null>(null);
@@ -49,7 +53,7 @@ export default function ZoneMap({ zones }: { zones: ScoredZone[] }) {
 
       leafletRef.current = L;
       const map = L.map(containerRef.current, {
-        center: ODENSE_CENTER,
+        center,
         zoom: 13,
         zoomControl: false,
       });
@@ -87,7 +91,7 @@ export default function ZoneMap({ zones }: { zones: ScoredZone[] }) {
 
     drawMarkers(L, map, zones, markersRef);
     map.invalidateSize();
-  }, [zones]);
+  }, [zones, center]);
 
   return (
     <div

@@ -7,11 +7,19 @@ import {
   getUpcomingWithinDays,
   rankZones,
 } from "@/lib/odense/zone-logic";
-import { getOdenseZones, getVisibleEvents } from "@/lib/odense/data";
+import {
+  getCityCenter,
+  getCityName,
+  getVisibleEvents,
+  getZones,
+} from "@/lib/cities/data";
+import { DEFAULT_CITY, type CityId } from "@/lib/cities/config";
+import { getStoredCity, storeCity } from "@/lib/cities/storage";
 import { clearAuthSession, getDriverName } from "@/lib/odense/auth";
 import HotZoneList from "@/components/odense/HotZoneList";
 import UpcomingEvents from "@/components/odense/UpcomingEvents";
 import ZoneMap from "@/components/odense/ZoneMap";
+import CitySwitcher from "@/components/odense/CitySwitcher";
 import { useRouter } from "next/navigation";
 
 const DRIVER_ID_KEY = "odense_driver_id";
@@ -35,6 +43,7 @@ function getOrCreateDriverId(): string {
 async function logAppOpen(
   driverId: string,
   driverName: string,
+  city: string,
   zone: string,
 ) {
   try {
@@ -44,7 +53,7 @@ async function logAppOpen(
       body: JSON.stringify({
         driverId,
         driverName,
-        city: "Odense",
+        city,
         zone,
       }),
     });
@@ -59,27 +68,41 @@ interface DriverViewProps {
 
 export default function DriverView({ initialNowIso }: DriverViewProps) {
   const router = useRouter();
-  const zones = useMemo(() => getOdenseZones(), []);
+  const [cityId, setCityId] = useState<CityId>(() => getStoredCity() ?? DEFAULT_CITY);
   const [now, setNow] = useState(() => new Date(initialNowIso));
   const [driverName, setDriverName] = useState("");
-  const events = useMemo(() => getVisibleEvents(now), [now]);
+
+  const zones = useMemo(() => getZones(cityId), [cityId]);
+  const events = useMemo(() => getVisibleEvents(cityId, now), [cityId, now]);
+  const mapCenter = useMemo(() => getCityCenter(cityId), [cityId]);
+  const cityName = getCityName(cityId);
 
   const ranked = useMemo(() => rankZones(zones, now), [zones, now]);
   const upcomingEvents = useMemo(() => getUpcomingWithinDays(events, now, 90), [events, now]);
   const hotCount = ranked.filter((z) => z.isHot).length;
 
   useEffect(() => {
+    storeCity(cityId);
+  }, [cityId]);
+
+  useEffect(() => {
     setNow(new Date());
     setDriverName(getDriverName() || "Chauffør");
-
-    const driverId = getOrCreateDriverId();
-    const name = getDriverName() || "Chauffør";
-    const topZone = rankZones(getOdenseZones(), new Date(initialNowIso))[0]?.name || "Odense";
-    void logAppOpen(driverId, name, topZone);
 
     const timer = setInterval(() => setNow(new Date()), 60_000);
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    const driverId = getOrCreateDriverId();
+    const name = getDriverName() || "Chauffør";
+    const topZone = rankZones(getZones(cityId), new Date())[0]?.name || cityName;
+    void logAppOpen(driverId, name, cityName, topZone);
+  }, [cityId, cityName]);
+
+  function handleCityChange(nextCity: CityId) {
+    setCityId(nextCity);
+  }
 
   function handleLogout() {
     clearAuthSession();
@@ -96,7 +119,7 @@ export default function DriverView({ initialNowIso }: DriverViewProps) {
               <span className="text-lg">🚕</span>
               <span className="text-sm font-black tracking-wide text-blue-400">ZYFLEX ZONE</span>
             </div>
-            <h1 className="text-lg font-bold text-white">Odense</h1>
+            <h1 className="text-lg font-bold text-white">{cityName}</h1>
             {driverName && (
               <p className="truncate text-xs text-slate-400">Velkommen, {driverName}</p>
             )}
@@ -116,6 +139,10 @@ export default function DriverView({ initialNowIso }: DriverViewProps) {
           </div>
         </div>
 
+        <div className="mt-3">
+          <CitySwitcher value={cityId} onChange={handleCityChange} />
+        </div>
+
         <div className="mt-3 flex gap-2">
           <StatusPill
             label={hotCount > 0 ? `${hotCount} hot${hotCount === 1 ? "" : "te"} zoner` : "Rolig periode"}
@@ -126,14 +153,14 @@ export default function DriverView({ initialNowIso }: DriverViewProps) {
       </header>
 
       <div className="relative h-[42vh] min-h-[240px] border-b border-[#1e2d45]">
-        <ZoneMap zones={ranked} />
+        <ZoneMap zones={ranked} center={mapCenter} />
         <div className="pointer-events-none absolute bottom-3 left-3 rounded-lg border border-[#1e2d45] bg-[#080c14]/90 px-2 py-1 text-[10px] text-slate-500">
           Opdateres hvert minut · {formatTimeDa(now)}
         </div>
       </div>
 
       <HotZoneList zones={ranked} />
-      <UpcomingEvents events={upcomingEvents} />
+      <UpcomingEvents events={upcomingEvents} zones={zones} />
     </div>
   );
 }

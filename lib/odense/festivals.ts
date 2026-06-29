@@ -1,7 +1,12 @@
-import festivalsData from "@/data/odense/festivals.json";
+import odenseFestivals from "@/data/odense/festivals.json";
+import koldingFestivals from "@/data/kolding/festivals.json";
+import type { CityId } from "@/lib/cities/config";
 import type { FestivalRecord, SpecialEvent, Zone } from "./types";
 
-const ODENSE_CENTER = { lat: 55.3955, lng: 10.3885 };
+const FESTIVALS_BY_CITY: Record<CityId, typeof odenseFestivals> = {
+  odense: odenseFestivals,
+  kolding: koldingFestivals,
+};
 
 function toDateKey(date: Date): string {
   return date.toISOString().slice(0, 10);
@@ -55,11 +60,12 @@ function buildFestivalTaxiReason(festival: FestivalRecord, zoneName: string): st
 function isFestivalVisible(
   festival: FestivalRecord,
   now: Date,
+  center: { lat: number; lng: number },
   maxDistanceKm: number,
   upcomingWithinDays: number,
 ): boolean {
   const today = toDateKey(now);
-  const distance = distanceKm(ODENSE_CENTER, festival);
+  const distance = distanceKm(center, festival);
 
   if (distance > maxDistanceKm) return false;
   if (today > festival.endDate) return false;
@@ -70,17 +76,23 @@ function isFestivalVisible(
   return daysUntilStart >= 0 && daysUntilStart <= upcomingWithinDays;
 }
 
-export function getNearbyFestivalEvents(zones: Zone[], now: Date = new Date()): SpecialEvent[] {
+export function getNearbyFestivalEvents(
+  cityId: CityId,
+  zones: Zone[],
+  center: { lat: number; lng: number },
+  now: Date = new Date(),
+): SpecialEvent[] {
+  const festivalsData = FESTIVALS_BY_CITY[cityId];
   const maxDistanceKm = festivalsData.maxDistanceKm ?? 50;
   const upcomingWithinDays = festivalsData.upcomingWithinDays ?? 90;
   const festivals = festivalsData.festivals as FestivalRecord[];
 
   return festivals
     .filter((festival) =>
-      isFestivalVisible(festival, now, maxDistanceKm, upcomingWithinDays),
+      isFestivalVisible(festival, now, center, maxDistanceKm, upcomingWithinDays),
     )
     .map((festival) => {
-      const distance = distanceKm(ODENSE_CENTER, festival);
+      const distance = distanceKm(center, festival);
       const zoneId = nearestZoneId(festival, zones);
       const zone = zones.find((z) => z.id === zoneId);
       const zoneDistanceKm = zone
