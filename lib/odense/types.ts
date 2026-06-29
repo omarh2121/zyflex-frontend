@@ -95,4 +95,6 @@ export interface DriverOpenLog {
   driverId: string;
   driverName: string;
   openedAt: string;
+  city?: string;
+  zone?: string;
 }

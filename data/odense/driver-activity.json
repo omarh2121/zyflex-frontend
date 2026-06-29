@@ -1,6 +1,13 @@
 {
   "opens": [
     {
+      "driverId": "driver-87edb997",
+      "driverName": "omar",
+      "openedAt": "2026-06-29T17:48:35.521Z",
+      "city": "Odense",
+      "zone": "OUH (sygehus)"
+    },
+    {
       "driverId": "driver-f85003eb",
       "driverName": "omar",
       "openedAt": "2026-06-29T17:20:15.966Z"

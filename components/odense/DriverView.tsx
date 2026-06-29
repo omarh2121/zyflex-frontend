@@ -32,12 +32,21 @@ function getOrCreateDriverId(): string {
   return id;
 }
 
-async function logAppOpen(driverId: string, driverName: string) {
+async function logAppOpen(
+  driverId: string,
+  driverName: string,
+  zone: string,
+) {
   try {
     await fetch("/api/odense/activity", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ driverId, driverName }),
+      body: JSON.stringify({
+        driverId,
+        driverName,
+        city: "Odense",
+        zone,
+      }),
     });
   } catch {
     // Stille fejl — chauffør-visningen skal ikke blokere
@@ -65,7 +74,8 @@ export default function DriverView({ initialNowIso }: DriverViewProps) {
 
     const driverId = getOrCreateDriverId();
     const name = getDriverName() || "Chauffør";
-    void logAppOpen(driverId, name);
+    const topZone = rankZones(getOdenseZones(), new Date(initialNowIso))[0]?.name || "Odense";
+    void logAppOpen(driverId, name, topZone);
 
     const timer = setInterval(() => setNow(new Date()), 60_000);
     return () => clearInterval(timer);

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { isPinValid, setAuthSession } from "@/lib/odense/auth";
+import { isPinValid, setAuthSession, clearAuthSession } from "@/lib/odense/auth";
+import { isOwnerPinValid, setOwnerSession, clearOwnerSession } from "@/lib/owner/auth";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -25,15 +26,27 @@ export default function LoginPage() {
       return;
     }
 
-    if (!isPinValid(pin)) {
-      setError("Forkert PIN-kode.");
+    const trimmedName = name.trim();
+    setLoading(true);
+
+    if (isOwnerPinValid(pin)) {
+      clearAuthSession();
+      setOwnerSession(trimmedName);
+      router.push("/owner");
+      router.refresh();
       return;
     }
 
-    setLoading(true);
-    setAuthSession(name.trim());
-    router.push("/odense");
-    router.refresh();
+    if (isPinValid(pin)) {
+      clearOwnerSession();
+      setAuthSession(trimmedName);
+      router.push("/odense");
+      router.refresh();
+      return;
+    }
+
+    setError("Forkert PIN-kode.");
+    setLoading(false);
   }
 
   return (
@@ -48,12 +61,12 @@ export default function LoginPage() {
             <span className="text-3xl">🚕</span>
             <span className="text-xl font-black tracking-wide text-blue-400">ZYFLEX ZONE</span>
           </div>
-          <p className="mt-3 text-sm text-slate-500">Chauffør-login · Odense</p>
+          <p className="mt-3 text-sm text-slate-500">Chauffør eller ejer · indtast navn og PIN</p>
         </div>
 
         <div className="rounded-2xl border border-[#1e2d45] bg-[#0f1520] p-8 shadow-2xl">
           <h1 className="mb-2 text-xl font-bold text-white">Log ind</h1>
-          <p className="mb-6 text-sm text-slate-500">Indtast navn og PIN-kode for at fortsætte.</p>
+          <p className="mb-6 text-sm text-slate-500">Ejer og chauffør bruger samme login — PIN afgør adgang.</p>
 
           {error && (
             <div className="mb-4 rounded-lg border border-red-900 bg-red-950/40 px-4 py-3 text-sm text-red-400">
@@ -73,7 +86,7 @@ export default function LoginPage() {
                 autoComplete="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Dit fornavn"
+                placeholder="Dit navn"
                 className="w-full rounded-xl border border-[#1e2d45] bg-[#080c14] px-4 py-3 text-sm text-white placeholder-slate-700 outline-none transition focus:border-blue-600"
               />
             </div>

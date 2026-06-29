@@ -15,7 +15,12 @@ async function readActivity(): Promise<{ opens: DriverOpenLog[] }> {
 }
 
 export async function POST(request: Request) {
-  const body = (await request.json()) as { driverId?: string; driverName?: string };
+  const body = (await request.json()) as {
+    driverId?: string;
+    driverName?: string;
+    city?: string;
+    zone?: string;
+  };
 
   if (!body.driverId) {
     return NextResponse.json({ error: "driverId mangler" }, { status: 400 });
@@ -25,6 +30,8 @@ export async function POST(request: Request) {
     driverId: body.driverId,
     driverName: body.driverName?.trim() || "Chauffør",
     openedAt: new Date().toISOString(),
+    city: body.city?.trim() || "Odense",
+    zone: body.zone?.trim() || undefined,
   };
 
   const data = await readActivity();
