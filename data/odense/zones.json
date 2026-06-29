@@ -1,0 +1,73 @@
+{
+  "zones": [
+    {
+      "id": "centrum-natteliv",
+      "name": "Odense Centrum / Natteliv",
+      "lat": 55.3951,
+      "lng": 10.3883,
+      "address": "Vestergade, 5000 Odense",
+      "demandType": "natteliv",
+      "busyDays": ["friday", "saturday"],
+      "busyHours": [{ "start": 22, "end": 3, "peakScore": 95 }],
+      "reason": "Barer og klubber lukker — mange skal hjem samtidig",
+      "priority": 5
+    },
+    {
+      "id": "banegaard",
+      "name": "Odense Banegård (OBC)",
+      "lat": 55.4013,
+      "lng": 10.3869,
+      "address": "Østre Stationsvej 27, 5000 Odense",
+      "demandType": "station",
+      "busyDays": "daily",
+      "busyHours": [
+        { "start": 7, "end": 9, "peakScore": 88 },
+        { "start": 15, "end": 18, "peakScore": 90 }
+      ],
+      "baselineScore": 28,
+      "reason": "Rejsende ankommer og afgår — særligt morgen og sen eftermiddag",
+      "priority": 4
+    },
+    {
+      "id": "ouh",
+      "name": "OUH (sygehus)",
+      "lat": 55.3847,
+      "lng": 10.3729,
+      "address": "Jernbane Allé 25, 5000 Odense",
+      "demandType": "sygehus",
+      "busyDays": "daily",
+      "busyHours": [
+        { "start": 6, "end": 9, "peakScore": 82 },
+        { "start": 16, "end": 20, "peakScore": 85 }
+      ],
+      "baselineScore": 35,
+      "reason": "Konstant patient- og besøgskørsel — morgen og aften",
+      "priority": 3
+    },
+    {
+      "id": "rosengaardcentret",
+      "name": "Rosengårdcentret",
+      "lat": 55.3872,
+      "lng": 10.4198,
+      "address": "Vestergade 98, 5000 Odense",
+      "demandType": "shopping",
+      "busyDays": "daily",
+      "busyHours": [{ "start": 15, "end": 21, "peakScore": 72 }],
+      "weekendBoost": 18,
+      "reason": "Shopping — sen eftermiddag og aften, især i weekenden",
+      "priority": 2
+    },
+    {
+      "id": "hoteller-centrum",
+      "name": "Hoteller i centrum",
+      "lat": 55.3973,
+      "lng": 10.3884,
+      "address": "Claus Bergs Gade 7, 5000 Odense",
+      "demandType": "hotel",
+      "busyDays": "daily",
+      "busyHours": [{ "start": 7, "end": 22, "peakScore": 55 }],
+      "reason": "Comwell HC Andersen, Grand Hotel — konference, turister, firmakørsel",
+      "priority": 1
+    }
+  ]
+}
