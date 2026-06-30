@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 
 export const metadata: Metadata = {
-  title: "Zyflex Zone · Odense",
+  title: "Byens Taxi · Chauffør",
   description: "Se hvor der er størst sandsynlighed for ture i Odense lige nu.",
 };
 

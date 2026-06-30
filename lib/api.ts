@@ -199,7 +199,7 @@ export async function getPipelineStatus(): Promise<Record<string, unknown>> {
 export function scoreColor(score: number): string {
   if (score >= 85) return "#ef4444"; // rød – GO NOW
   if (score >= 70) return "#f59e0b"; // amber – høj
-  if (score >= 50) return "#3b82f6"; // blå – middel
+  if (score >= 50) return "#ef4444"; // rød – middel
   return "#6b7280";                  // grå – lav
 }
 

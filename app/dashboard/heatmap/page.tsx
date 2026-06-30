@@ -9,7 +9,7 @@ const HeatmapMap = dynamic(() => import("@/components/dashboard/HeatmapMap"), {
   ssr: false,
   loading: () => (
     <div className="flex h-full items-center justify-center text-slate-600">
-      <span className="h-6 w-6 animate-spin rounded-full border-2 border-blue-700 border-t-transparent" />
+      <span className="h-6 w-6 animate-spin rounded-full border-2 border-red-700 border-t-transparent" />
     </div>
   ),
 });
@@ -48,7 +48,7 @@ export default function HeatmapPage() {
     <div className="flex h-screen flex-col bg-[#080c14] text-slate-200">
       {/* Top bar */}
       <div className="flex shrink-0 items-center gap-3 border-b border-[#1e2d45] bg-[#080c14] px-5 py-3">
-        <Link href="/dashboard" className="text-sm text-blue-400 hover:text-blue-300">← Kontrolrum</Link>
+        <Link href="/dashboard" className="text-sm text-red-400 hover:text-red-300">← Kontrolrum</Link>
         <span className="text-slate-700">/</span>
         <span className="text-sm font-semibold text-white">H3 Heatmap</span>
 
@@ -56,7 +56,7 @@ export default function HeatmapPage() {
         <select
           value={city}
           onChange={(e) => { setCity(e.target.value); load(e.target.value); }}
-          className="ml-auto rounded-lg border border-[#1e2d45] bg-[#0f1520] px-3 py-1.5 text-xs text-white outline-none focus:border-blue-600">
+          className="ml-auto rounded-lg border border-[#1e2d45] bg-[#0f1520] px-3 py-1.5 text-xs text-white outline-none focus:border-red-600">
           {["Horsens", "Vejle", "Herning", "Ikast", "Aarhus"].map((c) => (
             <option key={c} value={c}>{c}</option>
           ))}
@@ -68,7 +68,7 @@ export default function HeatmapPage() {
             <button key={f}
               onClick={() => setFilter(f)}
               className={`rounded-md px-3 py-1 text-xs font-semibold transition ${
-                filter === f ? "bg-blue-700 text-white" : "text-slate-500 hover:text-white"
+                filter === f ? "bg-red-700 text-white" : "text-slate-500 hover:text-white"
               }`}>
               {f === "all" ? "Alle" : f === "hot" ? "🔴 Hot" : "🔵 Middel"}
             </button>
@@ -86,7 +86,7 @@ export default function HeatmapPage() {
         {[
           { label: "Totale hexes", value: hexes.length, color: "#e2e8f0" },
           { label: "🔴 Hotspots (70+)", value: hotCount, color: "#ef4444" },
-          { label: "🔵 Middel (50-70)", value: mediumCount, color: "#3b82f6" },
+          { label: "🔴 Middel (50-70)", value: mediumCount, color: "#ef4444" },
           { label: "Vises nu", value: filtered.length, color: "#34d399" },
         ].map((s) => (
           <div key={s.label} className="flex items-center gap-2 text-xs">
@@ -101,7 +101,7 @@ export default function HeatmapPage() {
         {loading && (
           <div className="absolute inset-0 z-10 flex items-center justify-center bg-[#080c14]/80">
             <div className="text-center">
-              <div className="mx-auto mb-3 h-8 w-8 animate-spin rounded-full border-2 border-blue-700 border-t-transparent" />
+              <div className="mx-auto mb-3 h-8 w-8 animate-spin rounded-full border-2 border-red-700 border-t-transparent" />
               <div className="text-sm text-slate-500">Beregner {city} heatmap...</div>
             </div>
           </div>
@@ -128,7 +128,7 @@ export default function HeatmapPage() {
         {[
           { label: "85+", color: "#ef4444" },
           { label: "70+", color: "#f59e0b" },
-          { label: "50+", color: "#3b82f6" },
+          { label: "50+", color: "#ef4444" },
           { label: "<50", color: "#374151" },
         ].map((l) => (
           <div key={l.label} className="flex items-center gap-1.5 text-xs text-slate-500">

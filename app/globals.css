@@ -6,9 +6,9 @@
   --color-bg-card:      #0f1520;
   --color-bg-hover:     #131c2e;
   --color-border-dim:   #1e2d45;
-  --color-brand-400:    #60a5fa;
-  --color-brand-500:    #3b82f6;
-  --color-brand-600:    #2563eb;
+  --color-brand-400:    #f87171;
+  --color-brand-500:    #ef4444;
+  --color-brand-600:    #dc2626;
 
   --font-family-sans: var(--font-inter), system-ui, sans-serif;
 
@@ -29,8 +29,8 @@
   --bg-card:    #0f1520;
   --bg-hover:   #131c2e;
   --border-dim: #1e2d45;
-  --brand:      #3b82f6;
-  --brand-glow: rgba(59, 130, 246, 0.25);
+  --brand:      #dc2626;
+  --brand-glow: rgba(220, 38, 38, 0.25);
 }
 
 html { scroll-behavior: smooth; }
@@ -44,20 +44,20 @@ body {
 ::-webkit-scrollbar       { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-base); }
 ::-webkit-scrollbar-thumb { background: #1e2d45; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #2563eb; }
+::-webkit-scrollbar-thumb:hover { background: #dc2626; }
 
-*:focus-visible { outline: 2px solid #3b82f6; outline-offset: 2px; }
+*:focus-visible { outline: 2px solid #dc2626; outline-offset: 2px; }
 
 .gradient-text {
-  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+  background: linear-gradient(135deg, #f87171 0%, #fca5a5 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .card-glow:hover {
-  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3),
-              0 4px 32px rgba(59, 130, 246, 0.08);
+  box-shadow: 0 0 0 1px rgba(220, 38, 38, 0.3),
+              0 4px 32px rgba(220, 38, 38, 0.08);
 }
 
 .gonow-pulse { animation: gonow-pulse 1.2s ease-in-out infinite; }

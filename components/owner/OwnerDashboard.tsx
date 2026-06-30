@@ -161,7 +161,7 @@ export default function OwnerDashboard() {
   return (
     <div className="min-h-screen bg-[#080c14] text-white">
       <div className="pointer-events-none fixed inset-0 flex items-start justify-center">
-        <div className="mt-[-100px] h-[400px] w-[600px] rounded-full bg-blue-600/5 blur-[150px]" />
+        <div className="mt-[-100px] h-[400px] w-[600px] rounded-full bg-red-600/5 blur-[150px]" />
       </div>
 
       <header className="relative border-b border-[#1e2d45] bg-[#0f1520]/80 backdrop-blur">
@@ -169,8 +169,8 @@ export default function OwnerDashboard() {
           <div>
             <div className="flex items-center gap-2">
               <span className="text-2xl">🚕</span>
-              <span className="text-lg font-black tracking-wide text-blue-400">ZYFLEX</span>
-              <span className="rounded bg-blue-600/20 px-2 py-0.5 text-xs font-semibold text-blue-300">
+              <span className="text-lg font-black tracking-wide text-red-500">Byens Taxi</span>
+              <span className="rounded bg-red-600/20 px-2 py-0.5 text-xs font-semibold text-red-300">
                 Ejer
               </span>
             </div>
@@ -314,7 +314,7 @@ export default function OwnerDashboard() {
           <h2 className="mb-4 text-lg font-bold">Taxameter-analyse</h2>
 
           <div className="mb-4 flex flex-wrap items-center gap-3">
-            <label className="cursor-pointer rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold transition hover:bg-blue-500">
+            <label className="cursor-pointer rounded-xl bg-red-600 px-5 py-3 text-sm font-bold transition hover:bg-red-500">
               {uploading ? "Analyserer…" : "Upload taxameter-data"}
               <input
                 type="file"
@@ -355,7 +355,7 @@ export default function OwnerDashboard() {
               <div className="grid gap-4 lg:grid-cols-2">
                 {analysis.bestDays.length > 0 && (
                   <div className="rounded-xl border border-[#1e2d45] bg-[#0f1520] p-4">
-                    <h3 className="mb-3 font-semibold text-blue-300">Bedste dage</h3>
+                    <h3 className="mb-3 font-semibold text-red-300">Bedste dage</h3>
                     <ul className="space-y-2 text-sm">
                       {analysis.bestDays.map((d) => (
                         <li key={d.label} className="flex justify-between text-slate-300">
@@ -371,7 +371,7 @@ export default function OwnerDashboard() {
 
                 {analysis.bestTimes.length > 0 && (
                   <div className="rounded-xl border border-[#1e2d45] bg-[#0f1520] p-4">
-                    <h3 className="mb-3 font-semibold text-blue-300">Bedste tidspunkter</h3>
+                    <h3 className="mb-3 font-semibold text-red-300">Bedste tidspunkter</h3>
                     <ul className="space-y-2 text-sm">
                       {analysis.bestTimes.map((t) => (
                         <li key={t.label} className="flex justify-between text-slate-300">
@@ -387,7 +387,7 @@ export default function OwnerDashboard() {
 
                 {analysis.topZones.length > 0 && (
                   <div className="rounded-xl border border-[#1e2d45] bg-[#0f1520] p-4">
-                    <h3 className="mb-3 font-semibold text-blue-300">Mest aktive zoner</h3>
+                    <h3 className="mb-3 font-semibold text-red-300">Mest aktive zoner</h3>
                     <ul className="space-y-2 text-sm">
                       {analysis.topZones.map((z) => (
                         <li key={z.label} className="flex justify-between text-slate-300">
@@ -403,7 +403,7 @@ export default function OwnerDashboard() {
 
                 {analysis.driverPerformance.length > 0 && (
                   <div className="rounded-xl border border-[#1e2d45] bg-[#0f1520] p-4">
-                    <h3 className="mb-3 font-semibold text-blue-300">Chauffør-performance</h3>
+                    <h3 className="mb-3 font-semibold text-red-300">Chauffør-performance</h3>
                     <ul className="space-y-2 text-sm">
                       {analysis.driverPerformance.map((d) => (
                         <li key={d.name} className="flex justify-between text-slate-300">
@@ -420,7 +420,7 @@ export default function OwnerDashboard() {
 
               {analysis.repeatAddresses.length > 0 && (
                 <div className="mt-4 rounded-xl border border-[#1e2d45] bg-[#0f1520] p-4">
-                  <h3 className="mb-3 font-semibold text-blue-300">Gentagne adresser / faste kunder</h3>
+                  <h3 className="mb-3 font-semibold text-red-300">Gentagne adresser / faste kunder</h3>
                   <ul className="space-y-2 text-sm">
                     {analysis.repeatAddresses.map((a) => (
                       <li key={a.address} className="flex justify-between text-slate-300">
@@ -436,7 +436,7 @@ export default function OwnerDashboard() {
 
               {analysis.earningsTips.length > 0 && (
                 <div className="mt-4 rounded-xl border border-[#1e2d45] bg-[#0f1520] p-4">
-                  <h3 className="mb-3 font-semibold text-blue-300">Forslag til mere indtjening</h3>
+                  <h3 className="mb-3 font-semibold text-red-300">Forslag til mere indtjening</h3>
                   <ul className="list-inside list-disc space-y-1 text-sm text-slate-400">
                     {analysis.earningsTips.map((tip) => (
                       <li key={tip}>{tip}</li>
@@ -450,29 +450,29 @@ export default function OwnerDashboard() {
                   type="button"
                   onClick={handleAiAnalysis}
                   disabled={aiLoading}
-                  className="rounded-xl bg-purple-600 px-5 py-3 text-sm font-bold transition hover:bg-purple-500 disabled:opacity-60"
+                  className="rounded-xl bg-red-600 px-5 py-3 text-sm font-bold transition hover:bg-red-500 disabled:opacity-60"
                 >
                   {aiLoading ? "Analyserer med AI…" : "Analyser med AI"}
                 </button>
                 <button
                   type="button"
                   onClick={() => downloadReportPdf(analysis, aiReport || undefined)}
-                  className="rounded-xl border border-[#1e2d45] px-5 py-3 text-sm font-semibold text-slate-300 transition hover:border-blue-600 hover:text-white"
+                  className="rounded-xl border border-[#1e2d45] px-5 py-3 text-sm font-semibold text-slate-300 transition hover:border-red-600 hover:text-white"
                 >
                   Download rapport som PDF
                 </button>
                 <button
                   type="button"
                   onClick={() => downloadReportExcel(analysis, aiReport || undefined)}
-                  className="rounded-xl border border-[#1e2d45] px-5 py-3 text-sm font-semibold text-slate-300 transition hover:border-blue-600 hover:text-white"
+                  className="rounded-xl border border-[#1e2d45] px-5 py-3 text-sm font-semibold text-slate-300 transition hover:border-red-600 hover:text-white"
                 >
                   Download rapport som Excel
                 </button>
               </div>
 
               {aiReport && (
-                <div className="mt-4 rounded-xl border border-purple-900/50 bg-[#0f1520] p-6">
-                  <h3 className="mb-4 text-lg font-bold text-purple-300">
+                <div className="mt-4 rounded-xl border border-red-900/50 bg-[#0f1520] p-6">
+                  <h3 className="mb-4 text-lg font-bold text-red-300">
                     Taxameter-analyse for {analysis.companyName}
                   </h3>
                   <div className="whitespace-pre-wrap text-sm leading-relaxed text-slate-300">

@@ -34,7 +34,7 @@ ${analysis.repeatAddresses.length > 0 ? analysis.repeatAddresses.map((a) => `- $
 6. Anbefalinger til drift
 - Planlæg vagter tæt på Banegården og Sygehus i Horsens om morgenen.
 - Hold standby ved Centrum/Natteliv fredag-lørdag aften.
-- Brug Zyflex Zone til at flytte vogne før peak, ikke efter.
+- Brug Byens Taxi til at flytte vogne før peak, ikke efter.
 
 7. Muligheder for mere omsætning
 ${analysis.earningsTips.map((t) => `- ${t}`).join("\n")}

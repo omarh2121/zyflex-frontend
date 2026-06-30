@@ -35,7 +35,7 @@ export interface B2BLead {
 export function scoreColor(score: number): string {
   if (score >= 80) return "#ef4444";
   if (score >= 70) return "#f59e0b";
-  if (score >= 50) return "#3b82f6";
+  if (score >= 50) return "#ef4444";
   return "#6b7280";
 }
 
@@ -60,7 +60,7 @@ export function leadStatusLabel(status: B2BLead["status"]): string {
 export function leadStatusColor(status: B2BLead["status"]): string {
   switch (status) {
     case "new":
-      return "#60a5fa";
+      return "#f87171";
     case "contacted":
       return "#f59e0b";
     case "negotiating":

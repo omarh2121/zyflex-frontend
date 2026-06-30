@@ -44,7 +44,7 @@ function EventCard({ event, zones }: { event: SpecialEvent; zones: Zone[] }) {
   return (
     <li className="rounded-2xl border border-[#1e2d45] bg-[#0f1520] p-4">
       <div className="flex items-start gap-3">
-        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-purple-950/50 text-base ring-1 ring-purple-500/30">
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-red-950/50 text-base ring-1 ring-red-500/30">
           🎉
         </div>
 
@@ -70,13 +70,13 @@ function EventCard({ event, zones }: { event: SpecialEvent; zones: Zone[] }) {
             />
           </dl>
 
-          <div className="mt-4 rounded-xl border border-blue-900/40 bg-blue-950/20 p-3">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-blue-400">
+          <div className="mt-4 rounded-xl border border-red-900/40 bg-red-950/20 p-3">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-red-400">
               🚖 AI-anbefaling
             </h3>
             <p className="mt-2 text-sm leading-snug text-slate-300">{rec.aiAdvice}</p>
 
-            <div className="mt-3 space-y-2 border-t border-blue-900/30 pt-3">
+            <div className="mt-3 space-y-2 border-t border-red-900/30 pt-3">
               <RecRow icon="⏰" label="Bedste tidspunkt" value={rec.bestTime} />
               <RecRow icon="📍" label="Anbefalet placering" value={rec.recommendedPlacement} />
               <RecRow icon="🚕" label="Forventet aktivitet" value={rec.expectedActivity} />

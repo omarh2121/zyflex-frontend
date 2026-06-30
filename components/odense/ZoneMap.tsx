@@ -147,7 +147,7 @@ function drawZoneMarkers(
       radius: markerRadius(zone.score, zone.isHot, selected),
       fillColor: color,
       fillOpacity: selected ? 1 : zone.isHot ? 0.85 : zone.score > 0 ? 0.45 : 0.2,
-      color: selected ? "#60a5fa" : zone.isHot ? "#fff" : color,
+      color: selected ? "#ef4444" : zone.isHot ? "#fff" : color,
       weight: selected ? 3 : zone.isHot ? 2.5 : 1,
       opacity: 1,
       className: zone.isHot ? "zone-marker-hot" : undefined,
@@ -177,7 +177,7 @@ function drawUserMarker(
 
   const marker = L.circleMarker([userLocation.lat, userLocation.lng], {
     radius: 9,
-    fillColor: "#3b82f6",
+    fillColor: "#dc2626",
     fillOpacity: 1,
     color: "#fff",
     weight: 3,
@@ -185,7 +185,7 @@ function drawUserMarker(
   }).addTo(map);
 
   marker.bindTooltip(
-    `<div style="font-size:12px;font-weight:700;color:#60a5fa">Du er her</div>`,
+    `<div style="font-size:12px;font-weight:700;color:#ef4444">Du er her</div>`,
     { direction: "top", offset: [0, -10], opacity: 1 },
   );
 

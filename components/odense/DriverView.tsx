@@ -159,17 +159,17 @@ export default function DriverView({ initialNowIso }: DriverViewProps) {
           <div className="min-w-0">
             <div className="flex items-center gap-2">
               <span className="text-lg">🚕</span>
-              <span className="text-sm font-black tracking-wide text-blue-400">ZYFLEX ZONE</span>
+              <span className="text-sm font-black tracking-wide text-red-500">Byens Taxi</span>
             </div>
             <h1 className="text-lg font-bold text-white">{cityName}</h1>
             {driverName && (
               <p className="truncate text-xs text-slate-400">Velkommen, {driverName}</p>
             )}
             {selectedZone && (
-              <p className="truncate text-xs text-blue-400">Zone: {selectedZone.name}</p>
+              <p className="truncate text-xs text-red-400">Zone: {selectedZone.name}</p>
             )}
             {gpsActive && nearestZone && !selectedZone && (
-              <p className="truncate text-xs text-blue-400">
+              <p className="truncate text-xs text-red-400">
                 Nærmest: {nearestZone.zone.name} ({formatDistanceKm(nearestZone.distanceKm)})
               </p>
             )}
@@ -223,7 +223,7 @@ export default function DriverView({ initialNowIso }: DriverViewProps) {
             <button
               type="button"
               onClick={() => setFocusUserLocation(true)}
-              className="rounded-lg border border-[#1e2d45] bg-[#080c14]/95 px-3 py-2 text-xs font-semibold text-blue-300 transition hover:border-blue-600"
+              className="rounded-lg border border-[#1e2d45] bg-[#080c14]/95 px-3 py-2 text-xs font-semibold text-red-300 transition hover:border-red-600"
             >
               Centrer på mig
             </button>

@@ -53,7 +53,7 @@ export function downloadReportExcel(analysis: TaxameterAnalysis, aiReport?: stri
     XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(lines), "AI-rapport");
   }
 
-  const filename = `zyflex-taxameter-${new Date().toISOString().slice(0, 10)}.xlsx`;
+  const filename = `byens-taxi-taxameter-${new Date().toISOString().slice(0, 10)}.xlsx`;
   XLSX.writeFile(wb, filename);
 }
 
@@ -122,6 +122,6 @@ export function downloadReportPdf(analysis: TaxameterAnalysis, aiReport?: string
     }
   }
 
-  const filename = `zyflex-taxameter-${new Date().toISOString().slice(0, 10)}.pdf`;
+  const filename = `byens-taxi-taxameter-${new Date().toISOString().slice(0, 10)}.pdf`;
   doc.save(filename);
 }

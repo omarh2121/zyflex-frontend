@@ -48,7 +48,7 @@ function ZoneChip({
       onClick={onClick}
       className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold transition ${
         active
-          ? "bg-blue-600 text-white"
+          ? "bg-red-600 text-white"
           : "border border-[#1e2d45] bg-[#0f1520] text-slate-400 hover:text-white"
       }`}
     >

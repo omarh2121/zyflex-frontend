@@ -52,7 +52,7 @@ export function inputTypeLabel(type: DriverInputType): string {
 export function inputTypeColor(type: DriverInputType): string {
   switch (type) {
     case "observation":
-      return "#60a5fa";
+      return "#f87171";
     case "demand":
       return "#34d399";
     case "problem":

@@ -60,7 +60,7 @@ export default function FleetOverview() {
           <p className="text-4xl">🚕</p>
           <p className="mt-3 text-sm font-medium text-slate-300">Ingen vogne forbundet endnu.</p>
           <p className="mt-2 text-xs text-slate-500">
-            Når chauffører bruger Zyflex Zone, vises deres position og status her.
+            Når chauffører bruger Byens Taxi, vises deres position og status her.
           </p>
         </div>
       ) : (

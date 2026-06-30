@@ -46,7 +46,7 @@ function ScoreBar({ score }: { score: number }) {
       <div className="h-2 overflow-hidden rounded-full bg-[#1e2d45]">
         <div
           className="score-bar-fill h-full rounded-full transition-all duration-700"
-          style={{ width: `${score}%`, background: `linear-gradient(90deg, #3b82f6, ${color})` }}
+          style={{ width: `${score}%`, background: `linear-gradient(90deg, #dc2626, ${color})` }}
         />
       </div>
     </div>
@@ -127,7 +127,7 @@ export default function DashboardPage() {
         <div className="mx-auto flex max-w-6xl items-center gap-3 px-5 py-3">
           <Link href="/" className="flex items-center gap-2">
             <span className="text-xl">🚕</span>
-            <span className="font-black text-blue-400">ZYFLEX</span>
+            <span className="font-black text-red-500">Byens Taxi</span>
           </Link>
           <span className="text-slate-700">/</span>
           <span className="text-sm font-semibold text-white">Kontrolrum</span>
@@ -143,11 +143,11 @@ export default function DashboardPage() {
             )}
             <button
               onClick={() => load(true)}
-              className="rounded-lg border border-[#1e2d45] px-3 py-1.5 text-xs font-semibold text-slate-300 transition hover:border-blue-700 hover:text-white">
+              className="rounded-lg border border-[#1e2d45] px-3 py-1.5 text-xs font-semibold text-slate-300 transition hover:border-red-700 hover:text-white">
               🔄 Opdater
             </button>
             <Link href="/dashboard/driver"
-              className="rounded-lg bg-blue-600/20 border border-blue-900/40 px-3 py-1.5 text-xs font-semibold text-blue-400 transition hover:bg-blue-600/30">
+              className="rounded-lg bg-red-600/20 border border-red-900/40 px-3 py-1.5 text-xs font-semibold text-red-400 transition hover:bg-red-600/30">
               📱 Chauffør
             </Link>
           </div>
@@ -164,7 +164,7 @@ export default function DashboardPage() {
             [1,2,3,4].map(i => <LoadingCard key={i} h="h-20" />)
           ) : rec ? (
             <>
-              <StatCard label="Top Zone"     value={rec.recommended_zone.split(" ").slice(0,2).join(" ")} color="#60a5fa" />
+              <StatCard label="Top Zone"     value={rec.recommended_zone.split(" ").slice(0,2).join(" ")} color="#ef4444" />
               <StatCard label="Score"        value={`${rec.score}/100`} color={scoreColor(rec.score)} />
               <StatCard label="Est. kr/time" value={`${rec.earn_dkk_per_hour}`} color="#34d399" sub="DKK estimeret" />
               <StatCard label="Vejr"         value={`${rec.weather.temp_c}°C`} color="#f59e0b"
@@ -180,7 +180,7 @@ export default function DashboardPage() {
             <div className="rounded-2xl border border-[#1e3a5f] bg-[#0f1520] p-5">
               <div className="mb-4 flex items-center gap-2">
                 <span className="text-xl">🤖</span>
-                <span className="text-sm font-bold text-blue-300">AI ANBEFALING – LANGGRAPH</span>
+                <span className="text-sm font-bold text-red-300">AI ANBEFALING – LANGGRAPH</span>
                 {rec?.cached && (
                   <span className="ml-auto rounded-full bg-slate-800 px-2 py-0.5 text-[10px] text-slate-500">cache</span>
                 )}
@@ -218,7 +218,7 @@ export default function DashboardPage() {
                             <div>
                               <div className="font-semibold text-white">{ev.name}</div>
                               <div className="text-slate-500">{ev.venue} · {ev.time}</div>
-                              <div className="mt-0.5 text-blue-400">{ev.taxi_note}</div>
+                              <div className="mt-0.5 text-red-400">{ev.taxi_note}</div>
                             </div>
                           </div>
                         ))}
@@ -245,7 +245,7 @@ export default function DashboardPage() {
                 <div className="space-y-2">
                   {hotspots.hotspots.map((z) => (
                     <div key={z.zone}
-                      className="flex items-center gap-3 rounded-xl border border-[#1e2d45] p-3 transition hover:border-blue-900"
+                      className="flex items-center gap-3 rounded-xl border border-[#1e2d45] p-3 transition hover:border-red-900"
                       style={{ background: scoreBg(z.score) }}>
                       <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-xs font-black"
                         style={{ background: `${scoreColor(z.score)}20`, color: scoreColor(z.score) }}>
@@ -325,7 +325,7 @@ export default function DashboardPage() {
                 </div>
                 <div className="space-y-1.5 text-xs">
                   {[
-                    { k: "Version",   v: overview.version,                  c: "#60a5fa" },
+                    { k: "Version",   v: overview.version,                  c: "#ef4444" },
                     { k: "Status",    v: overview.status,                    c: "#34d399" },
                     { k: "Cache",     v: `${overview.cache.entries} entries`, c: "#e2e8f0" },
                     { k: "Logs",      v: `${overview.logging.recommendations_logged} anbefalinger`, c: "#e2e8f0" },
@@ -343,11 +343,11 @@ export default function DashboardPage() {
             {/* Quick links */}
             <div className="grid grid-cols-2 gap-2">
               <Link href="/dashboard/heatmap"
-                className="rounded-xl border border-[#1e2d45] bg-[#0f1520] p-3 text-center text-xs font-semibold text-slate-300 transition hover:border-blue-700 hover:text-white">
+                className="rounded-xl border border-[#1e2d45] bg-[#0f1520] p-3 text-center text-xs font-semibold text-slate-300 transition hover:border-red-700 hover:text-white">
                 🗺️ Heatmap
               </Link>
               <Link href="/dashboard/driver"
-                className="rounded-xl border border-[#1e2d45] bg-[#0f1520] p-3 text-center text-xs font-semibold text-slate-300 transition hover:border-blue-700 hover:text-white">
+                className="rounded-xl border border-[#1e2d45] bg-[#0f1520] p-3 text-center text-xs font-semibold text-slate-300 transition hover:border-red-700 hover:text-white">
                 📱 Driver View
               </Link>
             </div>

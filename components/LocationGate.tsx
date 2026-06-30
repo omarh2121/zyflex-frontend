@@ -54,14 +54,14 @@ function LocationRequiredScreen({
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#080c14] px-4">
       <div className="pointer-events-none fixed inset-0 flex items-center justify-center">
-        <div className="h-[500px] w-[500px] rounded-full bg-blue-600/5 blur-[150px]" />
+        <div className="h-[500px] w-[500px] rounded-full bg-red-600/5 blur-[150px]" />
       </div>
 
       <div className="relative w-full max-w-sm">
         <div className="mb-8 text-center">
           <div className="inline-flex items-center gap-2">
             <span className="text-3xl">📍</span>
-            <span className="text-xl font-black tracking-wide text-blue-400">ZYFLEX ZONE</span>
+            <span className="text-xl font-black tracking-wide text-red-500">Byens Taxi</span>
           </div>
           <p className="mt-3 text-sm text-slate-500">Placering påkrævet</p>
         </div>
@@ -69,7 +69,7 @@ function LocationRequiredScreen({
         <div className="rounded-2xl border border-[#1e2d45] bg-[#0f1520] p-8 shadow-2xl">
           <h1 className="mb-2 text-xl font-bold text-white">Tillad din placering</h1>
           <p className="mb-6 text-sm leading-relaxed text-slate-400">
-            Zyflex Zone bruger GPS til at vise dig på kortet, finde nærmeste zone og give
+            Byens Taxi bruger GPS til at vise dig på kortet, finde nærmeste zone og give
             bedre anbefalinger som {role}. Du kan ikke bruge appen uden adgang til placering.
           </p>
 
@@ -89,7 +89,7 @@ function LocationRequiredScreen({
 
           {isUnsupported && (
             <div className="mb-4 rounded-lg border border-red-900/50 bg-red-950/30 px-4 py-3 text-xs text-red-300">
-              Prøv en nyere browser på telefonen — GPS er påkrævet for Zyflex Zone.
+              Prøv en nyere browser på telefonen — GPS er påkrævet for Byens Taxi.
             </div>
           )}
 
@@ -98,7 +98,7 @@ function LocationRequiredScreen({
               type="button"
               onClick={onRequest}
               disabled={isRequesting}
-              className="w-full rounded-xl bg-blue-600 py-3 text-sm font-bold text-white transition hover:bg-blue-500 disabled:opacity-60"
+              className="w-full rounded-xl bg-red-600 py-3 text-sm font-bold text-white transition hover:bg-red-500 disabled:opacity-60"
             >
               {isRequesting
                 ? "Henter placering…"
@@ -109,7 +109,7 @@ function LocationRequiredScreen({
           )}
 
           <p className="mt-4 text-center text-[11px] text-slate-600">
-            Placeringen deles kun med Zyflex — ikke offentligt.
+            Placeringen deles kun med Byens Taxi — ikke offentligt.
           </p>
         </div>
       </div>

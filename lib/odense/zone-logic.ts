@@ -167,7 +167,7 @@ export function scoreColor(score: number): string {
   if (score >= 85) return "#ef4444";
   if (score >= 70) return "#f59e0b";
   if (score >= HOT_THRESHOLD) return "#34d399";
-  if (score > 0) return "#60a5fa";
+  if (score > 0) return "#f87171";
   return "#475569";
 }
 

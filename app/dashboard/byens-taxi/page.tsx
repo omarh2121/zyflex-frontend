@@ -19,7 +19,7 @@ export default function ByensTaxiDashboardPage() {
         <div className="mx-auto flex max-w-6xl items-center gap-3 px-5 py-3">
           <Link href="/" className="flex items-center gap-2">
             <span className="text-xl">🚕</span>
-            <span className="font-black text-blue-400">BYENS TAXI</span>
+            <span className="font-black text-red-500">Byens Taxi</span>
           </Link>
           <span className="text-slate-700">/</span>
           <span className="text-sm font-semibold text-white">AI Dashboard</span>
@@ -28,7 +28,7 @@ export default function ByensTaxiDashboardPage() {
             <span className="text-xs text-slate-500">Horsens</span>
             <Link
               href="/dashboard/driver"
-              className="rounded-lg border border-blue-900/40 bg-blue-600/20 px-3 py-1.5 text-xs font-semibold text-blue-400 transition hover:bg-blue-600/30">
+              className="rounded-lg border border-red-900/40 bg-red-600/20 px-3 py-1.5 text-xs font-semibold text-red-400 transition hover:bg-red-600/30">
               📱 Chauffør
             </Link>
           </div>
@@ -60,7 +60,7 @@ export default function ByensTaxiDashboardPage() {
         </div>
 
         <p className="mt-8 text-center text-xs text-slate-700">
-          Powered by Zyflex AI · Byens Taxi Horsens
+          Byens Taxi · Horsens
         </p>
       </main>
     </div>

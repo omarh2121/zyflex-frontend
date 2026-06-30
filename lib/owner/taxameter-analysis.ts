@@ -39,7 +39,7 @@ function buildEarningsTips(analysis: Omit<TaxameterAnalysis, "earningsTips">): s
   if (topDriver && analysis.driverPerformance.length > 1) {
     tips.push(`Lær af ${topDriver.name}s mønster (${topDriver.trips} ture) — del best practice med teamet.`);
   }
-  tips.push("Kobl taxameter-data med Zyflex Zone for at ramme hotspots før konkurrenterne.");
+  tips.push("Kobl taxameter-data med Byens Taxi for at ramme de rigtige zoner før peak.");
   return tips.slice(0, 6);
 }
 

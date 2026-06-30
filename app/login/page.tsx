@@ -52,14 +52,14 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#080c14] px-4">
       <div className="pointer-events-none fixed inset-0 flex items-center justify-center">
-        <div className="h-[500px] w-[500px] rounded-full bg-blue-600/5 blur-[150px]" />
+        <div className="h-[500px] w-[500px] rounded-full bg-red-600/5 blur-[150px]" />
       </div>
 
       <div className="relative w-full max-w-sm">
         <div className="mb-8 text-center">
           <div className="inline-flex items-center gap-2">
             <span className="text-3xl">🚕</span>
-            <span className="text-xl font-black tracking-wide text-blue-400">ZYFLEX ZONE</span>
+            <span className="text-xl font-black tracking-wide text-red-500">Byens Taxi</span>
           </div>
           <p className="mt-3 text-sm text-slate-500">Chauffør eller ejer · indtast navn og PIN</p>
         </div>
@@ -87,7 +87,7 @@ export default function LoginPage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Dit navn"
-                className="w-full rounded-xl border border-[#1e2d45] bg-[#080c14] px-4 py-3 text-sm text-white placeholder-slate-700 outline-none transition focus:border-blue-600"
+                className="w-full rounded-xl border border-[#1e2d45] bg-[#080c14] px-4 py-3 text-sm text-white placeholder-slate-700 outline-none transition focus:border-red-600"
               />
             </div>
 
@@ -106,14 +106,14 @@ export default function LoginPage() {
                 value={pin}
                 onChange={(e) => setPin(e.target.value.replace(/\D/g, "").slice(0, 4))}
                 placeholder="••••"
-                className="w-full rounded-xl border border-[#1e2d45] bg-[#080c14] px-4 py-3 text-center text-lg tracking-[0.4em] text-white placeholder-slate-700 outline-none transition focus:border-blue-600"
+                className="w-full rounded-xl border border-[#1e2d45] bg-[#080c14] px-4 py-3 text-center text-lg tracking-[0.4em] text-white placeholder-slate-700 outline-none transition focus:border-red-600"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-xl bg-blue-600 py-3 text-sm font-bold text-white transition hover:bg-blue-500 disabled:opacity-60"
+              className="w-full rounded-xl bg-red-600 py-3 text-sm font-bold text-white transition hover:bg-red-500 disabled:opacity-60"
             >
               {loading ? "Logger ind…" : "Log ind →"}
             </button>

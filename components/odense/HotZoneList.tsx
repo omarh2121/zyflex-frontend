@@ -61,7 +61,7 @@ export default function HotZoneList({
               }}
               className={`cursor-pointer rounded-2xl border p-4 transition ${
                 selected
-                  ? "border-blue-500/50 bg-blue-950/25 ring-1 ring-blue-500/30"
+                  ? "border-red-500/50 bg-red-950/25 ring-1 ring-red-500/30"
                   : zone.isHot
                     ? "border-amber-500/40 bg-amber-950/20 hover:border-amber-400/60"
                     : "border-[#1e2d45] bg-[#0f1520] hover:border-[#2a3f5f]"
@@ -88,7 +88,7 @@ export default function HotZoneList({
                       </span>
                     )}
                     {selected && (
-                      <span className="shrink-0 rounded-full bg-blue-500/20 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-blue-300">
+                      <span className="shrink-0 rounded-full bg-red-500/20 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-red-300">
                         Valgt
                       </span>
                     )}

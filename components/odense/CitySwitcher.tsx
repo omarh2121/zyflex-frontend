@@ -19,7 +19,7 @@ export default function CitySwitcher({ value, onChange }: CitySwitcherProps) {
             onClick={() => onChange(city.id)}
             className={`flex-1 rounded-lg px-3 py-2 text-xs font-bold transition ${
               active
-                ? "bg-blue-600 text-white shadow-sm"
+                ? "bg-red-600 text-white shadow-sm"
                 : "text-slate-500 hover:text-slate-300"
             }`}
           >

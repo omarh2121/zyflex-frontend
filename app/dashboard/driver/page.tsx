@@ -74,7 +74,7 @@ export default function DriverPage() {
       {/* ── LOADING ── */}
       {loading && (
         <div className="text-center">
-          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-blue-900 border-t-blue-500" />
+          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-red-900 border-t-red-500" />
           <p className="text-slate-500">Henter anbefaling...</p>
         </div>
       )}
@@ -85,7 +85,7 @@ export default function DriverPage() {
           <div className="mb-3 text-4xl">⚠️</div>
           <p className="mb-4 text-sm text-red-400">{error}</p>
           <button onClick={() => load(true)}
-            className="rounded-xl bg-blue-700 px-6 py-3 font-bold text-white">
+            className="rounded-xl bg-red-700 px-6 py-3 font-bold text-white">
             Prøv igen
           </button>
         </div>
@@ -185,7 +185,7 @@ export default function DriverPage() {
               {rec.events_today.map((ev, i) => (
                 <div key={i} className="mb-2 text-xs">
                   <div className="font-semibold text-white">{ev.name}</div>
-                  <div className="text-blue-400">{ev.taxi_note}</div>
+                  <div className="text-red-400">{ev.taxi_note}</div>
                 </div>
               ))}
             </div>
@@ -194,7 +194,7 @@ export default function DriverPage() {
           {/* Refresh button */}
           <button
             onClick={() => load(true)}
-            className="w-full rounded-2xl border border-[#1e2d45] py-4 text-sm font-bold text-slate-400 transition active:scale-95 hover:border-blue-700 hover:text-white">
+            className="w-full rounded-2xl border border-[#1e2d45] py-4 text-sm font-bold text-slate-400 transition active:scale-95 hover:border-red-700 hover:text-white">
             🔄 Opdater nu
           </button>
 

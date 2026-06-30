@@ -9,12 +9,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title:       "Zyflex AI – Intelligent Dispatch til Taxa og Flextrafik",
-  description: "AI-drevet positionering, live hotspots og eventintelligens til taxaejere og flextrafik-operatører i Danmark.",
-  keywords:    "taxa, flextrafik, AI dispatch, hotspot, Horsens, dansk taxi software",
+  title:       "Byens Taxi",
+  description: "Beslutningsværktøj til taxachauffører og vognmænd — zoner, events og taxameter-analyse.",
+  keywords:    "taxa, Byens Taxi, Horsens, chauffør, vognmand, zoner",
   openGraph: {
-    title:       "Zyflex AI – Smarter dispatch, færre tomkørsler",
-    description: "Real-time AI-anbefalinger til taxaflåder. Kend hotspots før dine konkurrenter.",
+    title:       "Byens Taxi",
+    description: "Vid hvor turen er, før den sker — zoner, events og indtjening.",
     type:        "website",
   },
 };

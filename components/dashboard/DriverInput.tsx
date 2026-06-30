@@ -69,7 +69,7 @@ export default function DriverInput() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="F.eks. Ahmed"
-              className="w-full rounded-lg border border-[#1e2d45] bg-[#080c14] px-3 py-2 text-sm text-white placeholder-slate-700 outline-none focus:border-blue-600"
+              className="w-full rounded-lg border border-[#1e2d45] bg-[#080c14] px-3 py-2 text-sm text-white placeholder-slate-700 outline-none focus:border-red-600"
             />
           </div>
           <div>
@@ -79,7 +79,7 @@ export default function DriverInput() {
             <select
               value={zone}
               onChange={(e) => setZone(e.target.value)}
-              className="w-full rounded-lg border border-[#1e2d45] bg-[#080c14] px-3 py-2 text-sm text-white outline-none focus:border-blue-600">
+              className="w-full rounded-lg border border-[#1e2d45] bg-[#080c14] px-3 py-2 text-sm text-white outline-none focus:border-red-600">
               {ZONES.map((z) => (
                 <option key={z} value={z}>{z}</option>
               ))}
@@ -99,7 +99,7 @@ export default function DriverInput() {
                 onClick={() => setType(t)}
                 className={`rounded-lg border px-3 py-1.5 text-xs font-semibold transition ${
                   type === t
-                    ? "border-blue-700 bg-blue-950/40 text-blue-300"
+                    ? "border-red-700 bg-red-950/40 text-red-300"
                     : "border-[#1e2d45] text-slate-500 hover:text-white"
                 }`}>
                 {inputTypeLabel(t)}
@@ -118,13 +118,13 @@ export default function DriverInput() {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="F.eks. Mange mennesker ved stationen, mangler biler..."
-            className="w-full resize-none rounded-lg border border-[#1e2d45] bg-[#080c14] px-3 py-2 text-sm text-white placeholder-slate-700 outline-none focus:border-blue-600"
+            className="w-full resize-none rounded-lg border border-[#1e2d45] bg-[#080c14] px-3 py-2 text-sm text-white placeholder-slate-700 outline-none focus:border-red-600"
           />
         </div>
 
         <button
           type="submit"
-          className="w-full rounded-xl bg-blue-600 py-2.5 text-sm font-bold text-white transition hover:bg-blue-500">
+          className="w-full rounded-xl bg-red-600 py-2.5 text-sm font-bold text-white transition hover:bg-red-500">
           {submitted ? "✓ Gemt" : "Send input"}
         </button>
       </form>

@@ -22,7 +22,7 @@ function hexPolygon(lat: number, lon: number, radiusKm = 0.25): [number, number]
 function hexColor(score: number): string {
   if (score >= 85) return "#ef4444";
   if (score >= 70) return "#f59e0b";
-  if (score >= 50) return "#3b82f6";
+  if (score >= 50) return "#ef4444";
   return "#374151";
 }
 
