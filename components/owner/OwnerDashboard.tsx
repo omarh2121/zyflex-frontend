@@ -2,17 +2,21 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import type { DriverOpenLog } from "@/lib/odense/types";
+import type { DriverOpenLog, ZoneFeedbackEntry } from "@/lib/odense/types";
 import { clearOwnerSession, getOwnerName } from "@/lib/owner/auth";
 import {
   aggregateDriverActivity,
   emptyActivity,
   formatLoginDa,
 } from "@/lib/owner/activity-stats";
+import {
+  aggregateZoneFeedback,
+  emptyZoneFeedback,
+} from "@/lib/owner/zone-feedback-stats";
 import { analyzeTrips, formatKr } from "@/lib/owner/taxameter-analysis";
 import { parseTaxameterFile } from "@/lib/owner/taxameter-parser";
 import { downloadReportExcel, downloadReportPdf } from "@/lib/owner/report-export";
-import type { OwnerActivitySnapshot, TaxameterAnalysis } from "@/lib/owner/types";
+import type { OwnerActivitySnapshot, TaxameterAnalysis, ZoneFeedbackSnapshot } from "@/lib/owner/types";
 import { AI_REPORT_STORAGE_KEY, ANALYSIS_STORAGE_KEY } from "@/lib/owner/types";
 import FleetOverview from "@/components/owner/FleetOverview";
 
@@ -58,6 +62,7 @@ export default function OwnerDashboard() {
   const router = useRouter();
   const [ownerName, setOwnerName] = useState("");
   const [activity, setActivity] = useState<OwnerActivitySnapshot>(emptyActivity());
+  const [zoneFeedback, setZoneFeedback] = useState<ZoneFeedbackSnapshot>(emptyZoneFeedback());
   const [analysis, setAnalysis] = useState<TaxameterAnalysis | null>(null);
   const [aiReport, setAiReport] = useState("");
   const [uploadError, setUploadError] = useState("");
@@ -75,13 +80,27 @@ export default function OwnerDashboard() {
     }
   }, []);
 
+  const loadZoneFeedback = useCallback(async () => {
+    try {
+      const res = await fetch("/api/odense/zone-feedback");
+      if (!res.ok) return;
+      const data = (await res.json()) as { entries: ZoneFeedbackEntry[] };
+      setZoneFeedback(
+        data.entries?.length ? aggregateZoneFeedback(data.entries) : emptyZoneFeedback(),
+      );
+    } catch {
+      setZoneFeedback(emptyZoneFeedback());
+    }
+  }, []);
+
   useEffect(() => {
     setOwnerName(getOwnerName() || "Ejer");
     setAnalysis(loadStoredAnalysis());
     const storedReport = localStorage.getItem(AI_REPORT_STORAGE_KEY);
     if (storedReport) setAiReport(storedReport);
     void loadActivity();
-  }, [loadActivity]);
+    void loadZoneFeedback();
+  }, [loadActivity, loadZoneFeedback]);
 
   function handleLogout() {
     clearOwnerSession();
@@ -136,6 +155,7 @@ export default function OwnerDashboard() {
   }
 
   const hasActivity = activity.drivers.length > 0;
+  const hasZoneFeedback = zoneFeedback.zones.length > 0;
   const hasAnalysis = analysis != null;
 
   return (
@@ -225,6 +245,66 @@ export default function OwnerDashboard() {
               <p className="font-medium text-slate-300">Ingen chauffør-aktivitet endnu.</p>
               <p className="mt-2 text-xs">
                 Når chauffører logger ind og bruger appen, vises de her med seneste login og by.
+              </p>
+            </EmptyState>
+          )}
+        </section>
+
+        <section>
+          <h2 className="mb-4 text-lg font-bold">Zone-feedback</h2>
+          <p className="mb-4 text-sm text-slate-500">
+            Chaufførernes svar på &quot;Fik du en tur her?&quot; — bruges til at lære hvilke zoner der faktisk giver ture.
+          </p>
+
+          {hasZoneFeedback ? (
+            <div className="overflow-hidden rounded-xl border border-[#1e2d45] bg-[#0f1520]">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-[#1e2d45] text-left text-xs uppercase text-slate-500">
+                    <th className="px-4 py-3">By</th>
+                    <th className="px-4 py-3">Zone</th>
+                    <th className="px-4 py-3">Ja</th>
+                    <th className="px-4 py-3">Nej</th>
+                    <th className="px-4 py-3">Total</th>
+                    <th className="px-4 py-3">Succesrate</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {zoneFeedback.zones.map((z) => (
+                    <tr
+                      key={`${z.city}-${z.zoneId}`}
+                      className="border-b border-[#1e2d45]/50 last:border-0"
+                    >
+                      <td className="px-4 py-3 text-slate-400">{z.city}</td>
+                      <td className="px-4 py-3 font-medium">{z.zoneName}</td>
+                      <td className="px-4 py-3 text-green-400">{z.yesCount}</td>
+                      <td className="px-4 py-3 text-slate-400">{z.noCount}</td>
+                      <td className="px-4 py-3 text-slate-300">{z.total}</td>
+                      <td className="px-4 py-3">
+                        <span
+                          className={
+                            z.successRate >= 50
+                              ? "text-green-400"
+                              : z.successRate > 0
+                                ? "text-amber-400"
+                                : "text-slate-500"
+                          }>
+                          {z.successRate}%
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <p className="border-t border-[#1e2d45] px-4 py-2 text-xs text-slate-600">
+                {zoneFeedback.totalResponses} svar i alt
+              </p>
+            </div>
+          ) : (
+            <EmptyState>
+              <p className="font-medium text-slate-300">Ingen feedback endnu.</p>
+              <p className="mt-2 text-xs">
+                Når chauffører trykker Ja eller Nej ved en zone, vises det her med succesrate pr. zone.
               </p>
             </EmptyState>
           )}

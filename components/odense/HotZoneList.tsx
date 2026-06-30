@@ -1,15 +1,26 @@
 import type { ScoredZone } from "@/lib/odense/types";
 import { scoreColor } from "@/lib/odense/zone-logic";
 import { NavigateSection } from "@/components/odense/NavigateButton";
+import ZoneFeedbackButtons from "@/components/odense/ZoneFeedbackButtons";
 
 export default function HotZoneList({
   zones,
   selectedZoneId,
   onSelectZone,
+  cityName,
+  driverId,
+  driverName,
+  userLat,
+  userLng,
 }: {
   zones: ScoredZone[];
   selectedZoneId?: string | null;
   onSelectZone?: (zoneId: string) => void;
+  cityName: string;
+  driverId: string;
+  driverName: string;
+  userLat?: number;
+  userLng?: number;
 }) {
   const hotCount = zones.filter((z) => z.isHot).length;
   const displayZones = selectedZoneId
@@ -91,6 +102,15 @@ export default function HotZoneList({
                       googleMapsUrl: zone.googleMapsUrl,
                     }}
                     areaFallback={zone.name}
+                  />
+                  <ZoneFeedbackButtons
+                    zoneId={zone.id}
+                    zoneName={zone.name}
+                    city={cityName}
+                    driverId={driverId}
+                    driverName={driverName}
+                    lat={userLat}
+                    lng={userLng}
                   />
                 </div>
 

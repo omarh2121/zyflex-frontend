@@ -100,3 +100,18 @@ export interface DriverOpenLog {
   city?: string;
   zone?: string;
 }
+
+export type ZoneFeedbackAnswer = "yes" | "no";
+
+export interface ZoneFeedbackEntry {
+  id: string;
+  driverId: string;
+  driverName: string;
+  city: string;
+  zoneId: string;
+  zoneName: string;
+  answer: ZoneFeedbackAnswer;
+  answeredAt: string;
+  lat?: number;
+  lng?: number;
+}

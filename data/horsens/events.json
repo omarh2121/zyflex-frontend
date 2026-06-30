@@ -1,3 +1,76 @@
 {
-  "events": []
+  "events": [
+    {
+      "id": "horsens-centrum-2026-07-23",
+      "title": "Event i Horsens Centrum",
+      "type": "Andet",
+      "zoneId": "centrum-natteliv",
+      "date": "2026-07-23",
+      "time": "Hele dagen",
+      "place": "Horsens Midtby",
+      "description": "Arrangement i Horsens centrum — forvent øget trafik i midtbyen.",
+      "address": "Torvet, 8700 Horsens",
+      "lat": 55.8614,
+      "lng": 9.8503,
+      "source": "manual"
+    },
+    {
+      "id": "horsens-centrum-2026-08-02",
+      "title": "Event i Horsens Centrum",
+      "type": "Andet",
+      "zoneId": "centrum-natteliv",
+      "date": "2026-08-02",
+      "time": "Hele dagen",
+      "place": "Horsens Midtby",
+      "description": "Arrangement i Horsens centrum — forvent øget trafik i midtbyen.",
+      "address": "Torvet, 8700 Horsens",
+      "lat": 55.8614,
+      "lng": 9.8503,
+      "source": "manual"
+    },
+    {
+      "id": "horsens-fejring-2026-08-21",
+      "title": "Horsens-fejring (stjerner & iværksættere)",
+      "type": "Andet",
+      "zoneId": "centrum-natteliv",
+      "date": "2026-08-21",
+      "time": "Hele dagen",
+      "place": "Horsens Midtby",
+      "description": "Horsens-fejring med stjerner og iværksættere i midtbyen.",
+      "address": "Torvet, 8700 Horsens",
+      "lat": 55.8614,
+      "lng": 9.8503,
+      "source": "manual"
+    },
+    {
+      "id": "horsens-pride-2026-08-22",
+      "title": "Horsens Pride",
+      "type": "Festival",
+      "zoneId": "centrum-natteliv",
+      "date": "2026-08-22",
+      "time": "Hele dagen",
+      "place": "Horsens Midtby",
+      "description": "Horsens Pride i midtbyen — forvent mange gæster og øget taxa-efterspørgsel.",
+      "address": "Torvet, 8700 Horsens",
+      "lat": 55.8614,
+      "lng": 9.8503,
+      "major": true,
+      "source": "manual"
+    },
+    {
+      "id": "horsens-middelalderfestival-2026-08-28",
+      "title": "Horsens Middelalderfestival",
+      "type": "Festival",
+      "zoneId": "faengslet",
+      "date": "2026-08-28",
+      "time": "Hele dagen",
+      "place": "FÆNGSLET",
+      "description": "Horsens Middelalderfestival på FÆNGSLET — stor begivenhed med mange besøgende.",
+      "address": "Gefionsvej 82, 8700 Horsens",
+      "lat": 55.8631,
+      "lng": 9.8422,
+      "major": true,
+      "source": "manual"
+    }
+  ]
 }

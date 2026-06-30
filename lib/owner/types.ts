@@ -61,6 +61,21 @@ export interface OwnerActivitySnapshot {
   openedTodayNames: string[];
 }
 
+export interface ZoneFeedbackSummary {
+  city: string;
+  zoneId: string;
+  zoneName: string;
+  yesCount: number;
+  noCount: number;
+  total: number;
+  successRate: number;
+}
+
+export interface ZoneFeedbackSnapshot {
+  totalResponses: number;
+  zones: ZoneFeedbackSummary[];
+}
+
 export const ANALYSIS_STORAGE_KEY = "owner_taxameter_analysis";
 export const AI_REPORT_STORAGE_KEY = "owner_ai_report";
 

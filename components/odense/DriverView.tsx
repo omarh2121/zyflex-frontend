@@ -79,6 +79,7 @@ export default function DriverView({ initialNowIso }: DriverViewProps) {
   const [focusUserLocation, setFocusUserLocation] = useState(false);
   const [now, setNow] = useState(() => new Date(initialNowIso));
   const [driverName, setDriverName] = useState("");
+  const [driverId, setDriverId] = useState("");
 
   const {
     location: userLocation,
@@ -119,6 +120,7 @@ export default function DriverView({ initialNowIso }: DriverViewProps) {
   useEffect(() => {
     setNow(new Date());
     setDriverName(getDriverName() || "Chauffør");
+    setDriverId(getOrCreateDriverId());
 
     const timer = setInterval(() => setNow(new Date()), 60_000);
     return () => clearInterval(timer);
@@ -237,6 +239,11 @@ export default function DriverView({ initialNowIso }: DriverViewProps) {
         zones={ranked}
         selectedZoneId={selectedZoneId}
         onSelectZone={(id) => handleZoneSelect(id)}
+        cityName={cityName}
+        driverId={driverId}
+        driverName={driverName}
+        userLat={userLocation?.lat}
+        userLng={userLocation?.lng}
       />
       <UpcomingEvents events={upcomingEvents} zones={zones} />
     </div>
